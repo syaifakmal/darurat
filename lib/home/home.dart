@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text(
           'Dashboard',
-          style: Textstyle.semiBold.copyWith(fontSize: 24),
+          style: Textstyle.medium.copyWith(fontSize: 24),
         ),
         centerTitle: true,
         leading: Builder(
