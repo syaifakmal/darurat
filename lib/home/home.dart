@@ -14,37 +14,32 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Dashboard',
-          style: Textstyle.medium.copyWith(fontSize: 24),
-        ),
-        centerTitle: true,
-        leading: Builder(
-          builder: (BuildContext context) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: 16.w),
-                SizedBox(
-                  width: 25.w,
-                  height: 25.h,
-                  child: InkWell(
-                    onTap: () {
-                      Scaffold.of(context).openDrawer();
-                    },
-                  ),
+        centerTitle: false,
+        title: SizedBox(
+          height: 32,
+          child: TextField(
+            decoration: InputDecoration(
+                filled: true,
+                fillColor: lightGrey,
+                contentPadding: EdgeInsets.only(top: 6.h, left: 14.w),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.r),
+                  borderSide: BorderSide.none,
                 ),
-              ],
-            );
-          },
+                hintText: 'Search',
+                hintStyle:
+                    Textstyle.regular.copyWith(fontSize: 13.sp, color: grey)),
+          ),
         ),
-        leadingWidth: 60.w,
         backgroundColor: white,
-        elevation: 1,
+        elevation: 0.4,
       ),
       body: SafeArea(
-        child: Container(
-          child: Text('data'),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Container(
+            child: Text('data'),
+          ),
         ),
       ),
     );
