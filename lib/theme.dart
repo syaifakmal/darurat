@@ -8,22 +8,22 @@ const Color grey = Color(0xFF6B6B6B);
 const Color black = Color(0xFF222429);
 
 class Textstyle {
-  static TextStyle regular = GoogleFonts.openSans(
+  static TextStyle regular = GoogleFonts.rubik(
     color: black,
     fontWeight: FontWeight.w400,
   );
 
-  static TextStyle medium = GoogleFonts.openSans(
+  static TextStyle medium = GoogleFonts.rubik(
     color: black,
     fontWeight: FontWeight.w500,
   );
 
-  static TextStyle semiBold = GoogleFonts.openSans(
+  static TextStyle semiBold = GoogleFonts.rubik(
     color: black,
     fontWeight: FontWeight.w600,
   );
 
-  static TextStyle bold = GoogleFonts.openSans(
+  static TextStyle bold = GoogleFonts.rubik(
     color: black,
     fontWeight: FontWeight.w700,
   );

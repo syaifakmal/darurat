@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           splashColor: Colors.transparent,
         ),
       ),
-      designSize: const Size(360, 640),
+      designSize: const Size(360, 800),
     );
   }
 }
