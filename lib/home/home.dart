@@ -1,4 +1,7 @@
-import 'package:darurat/theme.dart';
+import 'package:darurat/utils/colors.dart';
+import 'package:darurat/utils/fonts.dart.dart';
+import 'package:darurat/utils/images.dart';
+import 'package:darurat/utils/size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,52 +17,111 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         // appBar: AppBar(
-        //   centerTitle: false,
-        //   title: SizedBox(
+        //   title: Container(
         //     height: 32,
-        //     child: TextField(
-        //       decoration: InputDecoration(
-        //           filled: true,
-        //           fillColor: lightGrey,
-        //           contentPadding: EdgeInsets.only(top: 6.h, left: 14.w),
-        //           border: OutlineInputBorder(
-        //             borderRadius: BorderRadius.circular(10.r),
-        //             borderSide: BorderSide.none,
-        //           ),
-        //           hintText: 'Search',
-        //           hintStyle:
-        //               Textstyle.regular.copyWith(fontSize: 13.sp, color: grey)),
+        //     color: Colors.green,
+        //     child: Row(
+        //       children: [
+        //         // TextField(
+        //         //   decoration: InputDecoration(
+        //         //       filled: true,
+        //         //       fillColor: lightGrey,
+        //         //       contentPadding: EdgeInsets.only(top: 6.h, left: 14.w),
+        //         //       border: OutlineInputBorder(
+        //         //         borderRadius: BorderRadius.circular(10),
+        //         //         borderSide: BorderSide.none,
+        //         //       ),
+        //         //       hintText: 'Search',
+        //         //       hintStyle:
+        //         //           Poppins.regular.copyWith(fontSize: 13, color: grey)),
+        //         // ),
+        //       ],
         //     ),
         //   ),
-        //   backgroundColor: white,
-        //   elevation: 0.4,
         // ),
         body: CustomScrollView(
       slivers: [
         SliverAppBar(
           backgroundColor: white,
-          title: SizedBox(
-            height: 32,
-            child: TextField(
-              decoration: InputDecoration(
-                  filled: true,
-                  fillColor: lightGrey,
-                  contentPadding: EdgeInsets.only(top: 6.h, left: 14.w),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.r),
-                    borderSide: BorderSide.none,
+          titleSpacing: 0,
+          title: Container(
+            // height: 32,
+            // color: Colors.green,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // TextField(
+                  //   decoration: InputDecoration(
+                  //       filled: true,
+                  //       fillColor: lightGrey,
+                  //       contentPadding: EdgeInsets.only(top: 6.h, left: 14.w),
+                  //       border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(10),
+                  //         borderSide: BorderSide.none,
+                  //       ),
+                  //       hintText: 'Search',
+                  //       hintStyle:
+                  //           Poppins.regular.copyWith(fontSize: 13, color: grey)),
+                  // ),
+                  Expanded(
+                    child: Container(
+                      height: 34,
+                      // color: Colors.blue,
+                      child: TextField(
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: lightGrey,
+                            contentPadding: EdgeInsets.only(top: 6.h, left: 14.w),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none,
+                            ),
+                            hintText: 'Search',
+                            hintStyle: Poppins.regular.copyWith(fontSize: 15, color: grey)),
+                      ),
+                    ),
                   ),
-                  hintText: 'Search',
-                  hintStyle:
-                      Textstyle.regular.copyWith(fontSize: 13.sp, color: grey)),
+                  const SizedBox(width: 6),
+                  Container(
+                    height: 56,
+                    width: 34,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                      image: AssetImage(Images.iconAdd),
+                    )),
+                    // child: IconButton(
+                    //   onPressed: () {},
+                    //   icon: Image.asset(Images.iconAdd, fit: BoxFit.cover, ),
+                    // ),
+                  ),
+                  const SizedBox(width: 6),
+                  Container(
+                    height: 56,
+                    width: 34,
+                    decoration: const BoxDecoration(
+                        // color: Colors.orange,
+                        image: DecorationImage(
+                      // fit: BoxFit.fitWidth,
+                      image: AssetImage(Images.iconMenu),
+                    )),
+                    // child: IconButton(
+                    //   onPressed: () {},
+                    //   icon: Image.asset(Images.iconMenu),
+                    // ),
+                  ),
+                ],
+              ),
             ),
           ),
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: Image.asset('assets/icons/plusIcon.png'))
-          ],
         ),
+        SliverFillRemaining(
+          child: Center(
+            child: Text(Size.flexibleWidth(context, 100).toString()),
+          ),
+        )
       ],
     ));
   }

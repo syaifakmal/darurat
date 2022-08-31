@@ -2,7 +2,6 @@ import 'package:darurat/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -25,8 +24,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: const Home(),
         theme: ThemeData(
-          highlightColor: Colors.transparent,
-          splashColor: Colors.transparent,
+          // highlightColor: Colors.transparent,
+          // splashColor: Colors.transparent,
         ),
       ),
       designSize: const Size(360, 800),
