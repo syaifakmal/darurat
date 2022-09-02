@@ -1,4 +1,4 @@
-import 'package:darurat/home/home.dart';
+import 'package:darurat/view/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,8 +7,8 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      // statusBarIconBrightness: Brightness.dark,
-      // statusBarBrightness: Brightness.light
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light
     ),
   );
   runApp(const MyApp());
