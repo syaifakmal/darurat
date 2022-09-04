@@ -4,11 +4,15 @@ class AppBarIcon extends StatelessWidget {
   final String image;
   final VoidCallback? onTap;
   final String? tooltip;
+  final double leftPadding;
+  final double rightPadding;
 
   const AppBarIcon(
     this.image, {
     this.onTap,
     this.tooltip,
+    this.leftPadding = 0,
+    this.rightPadding = 0,
     Key? key,
   }) : super(key: key);
 
@@ -18,7 +22,8 @@ class AppBarIcon extends StatelessWidget {
       message: tooltip ?? '',
       child: InkWell(
         onTap: onTap,
-        child: SizedBox(
+        child: Container(
+          padding: EdgeInsets.only(left: leftPadding, right: rightPadding),
           height: 56,
           child: Center(
             child: Container(

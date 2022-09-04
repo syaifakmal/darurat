@@ -1,10 +1,8 @@
 import 'package:darurat/utils/colors.dart';
 import 'package:darurat/utils/fonts.dart.dart';
 import 'package:darurat/utils/images.dart';
-import 'package:darurat/utils/size.dart';
-import 'package:darurat/view/empty_state/empty_state.dart';
 import 'package:darurat/view/home/widgets/card_widget.dart';
-import 'package:darurat/view/options/settings.dart';
+import 'package:darurat/view/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -31,7 +29,7 @@ class _HomeState extends State<Home> {
               elevation: 0,
               floating: true,
               title: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.only(left: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,28 +41,33 @@ class _HomeState extends State<Home> {
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: lightGrey,
-                              prefixIcon: Image.asset(Images.iconSearch, scale: 3.5),
+                              prefixIcon:
+                                  Image.asset(Images.iconSearch, scale: 3.5),
                               contentPadding: EdgeInsets.only(right: 14.w),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none,
                               ),
                               hintText: 'Search',
-                              hintStyle: Poppins.regular.copyWith(fontSize: 15, color: grey)),
+                              hintStyle: Poppins.regular
+                                  .copyWith(fontSize: 15, color: grey)),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 8),
                     AppBarIcon(
                       Images.iconAdd,
-                      onTap: () => print('tapped!'),
+                      onTap: () => debugPrint('tapped!'),
                       tooltip: 'Add',
+                      leftPadding: 8,
+                      rightPadding: 4,
                     ),
-                    const SizedBox(width: 8),
                     AppBarIcon(
                       Images.iconMenu,
-                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Settings())),
+                      onTap: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Settings())),
                       tooltip: 'Settings',
+                      leftPadding: 4,
+                      rightPadding: 16,
                     ),
                   ],
                 ),
@@ -74,7 +77,11 @@ class _HomeState extends State<Home> {
               hasScrollBody: false,
               child: Column(
                 children: [
-                  for(var i = 0; i < 100; i++) CardTile(onTap: null, title: 'aasdasdasdasd', subtitle: 'subtitle')
+                  for (var i = 0; i < 20; i++)
+                    CardTile(
+                        onTap: null,
+                        title: 'aasdasdasdasd',
+                        subtitle: 'subtitle')
                 ],
               ),
             )

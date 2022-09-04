@@ -46,7 +46,7 @@ class CardTile extends StatelessWidget {
             const SizedBox(width: 8),
             Container(
               // color: Colors.orange,
-              width: Size.flexibleWidth(context, 45),
+              width: Size.flexibleWidth(context, 60),
               child: Text(
                 title!,
                 style: Poppins.semiBold.copyWith(fontSize: 14),
