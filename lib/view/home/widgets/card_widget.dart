@@ -1,8 +1,10 @@
+import 'package:darurat/provider/theme_provider.dart';
 import 'package:darurat/utils/colors.dart';
 import 'package:darurat/utils/fonts.dart.dart';
 import 'package:darurat/utils/images.dart';
 import 'package:darurat/utils/size.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CardTile extends StatelessWidget {
   final VoidCallback? onTap;
@@ -10,6 +12,7 @@ class CardTile extends StatelessWidget {
   final String? title;
   final String? subtitle;
   final String? icon;
+  final Color color;
 
   const CardTile({
     Key? key,
@@ -18,6 +21,7 @@ class CardTile extends StatelessWidget {
     this.icon,
     required this.title,
     this.subtitle,
+    this.color = black,
   }) : super(key: key);
 
   Widget _withIcon(BuildContext context) {
@@ -25,36 +29,35 @@ class CardTile extends StatelessWidget {
       onTap: onTap,
       onLongPress: onLongPress,
       child: Container(
-        color: white,
+        // color: white,
         width: Size.flexibleWidth(context, 100),
         padding: const EdgeInsets.symmetric(horizontal: 16),
         height: 60,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              height: 34,
-              width: 34,
-              // margin: EdgeInsets.only(right: 8),
-              decoration: BoxDecoration(
-                // color: Colors.red,
-                image: DecorationImage(
-                  image: AssetImage(icon ?? Images.iconPlaceholder),
+        child: Consumer<ThemeProvider>(
+          builder: (context, themeProvider, child) =>  Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                height: 34,
+                width: 34,
+                child: Image.asset(
+                  icon!,
+                  color: themeProvider.textTheme,
                 ),
               ),
-            ),
-            const SizedBox(width: 8),
-            Container(
-              // color: Colors.orange,
-              width: Size.flexibleWidth(context, 60),
-              child: Text(
-                title!,
-                style: Poppins.semiBold.copyWith(fontSize: 14),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+              const SizedBox(width: 8),
+              Container(
+                // color: Colors.orange,
+                width: Size.flexibleWidth(context, 60),
+                child: Text(
+                  title!,
+                  style: Poppins.semiBold.copyWith(fontSize: 14, color: themeProvider.textTheme),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -65,35 +68,37 @@ class CardTile extends StatelessWidget {
       onTap: onTap,
       onLongPress: onLongPress,
       child: Container(
-        color: white,
+        // color: white,
         width: Size.flexibleWidth(context, 100),
         padding: const EdgeInsets.symmetric(horizontal: 16),
         height: 60,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              // color: Colors.orange,
-              width: Size.flexibleWidth(context, 45),
-              child: Text(
-                title!,
-                style: Poppins.semiBold.copyWith(fontSize: 14),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+        child: Consumer<ThemeProvider>(
+          builder: (context, themeProvider, child) => Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                // color: Colors.orange,
+                width: Size.flexibleWidth(context, 45),
+                child: Text(
+                  title!,
+                  style: Poppins.semiBold.copyWith(fontSize: 14,),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
-            Container(
-              width: Size.flexibleWidth(context, 32),
-              // color: Colors.greenAccent,
-              child: Text(
-                subtitle!,
-                style: Poppins.regular.copyWith(fontSize: 14),
-                textAlign: TextAlign.right,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+              Container(
+                width: Size.flexibleWidth(context, 32),
+                // color: Colors.greenAccent,
+                child: Text(
+                  subtitle!,
+                  style: Poppins.regular.copyWith(fontSize: 14, color: themeProvider.textTheme),
+                  textAlign: TextAlign.right,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

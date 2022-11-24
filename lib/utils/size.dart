@@ -1,15 +1,6 @@
 import 'package:flutter/material.dart';
 
 class Size {
-  static const double two = 2.0;
-  static const double five = 5.0;
-  static const double ten = 10.0;
-  static const double fifthTeen = 15.0;
-  static const double sixthTeen = 16.0;
-  static const double sevenTeen = 17.0;
-  static const double twenty = 20.0;
-  static const double twentyFive = 25.0;
-
   /// [size] as in percentage.
   ///
   /// **Example:**

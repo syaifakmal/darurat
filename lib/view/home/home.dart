@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
           physics: const BouncingScrollPhysics(),
           slivers: [
             SliverAppBar(
-              backgroundColor: white,
+              // backgroundColor: white,
               titleSpacing: 0,
               elevation: 0,
               floating: true,
@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
                         child: TextField(
                           decoration: InputDecoration(
                               filled: true,
-                              fillColor: lightGrey,
+                              fillColor: Theme.of(context).colorScheme.secondary,
                               prefixIcon:
                                   Image.asset(Images.iconSearch, scale: 3.5),
                               contentPadding: EdgeInsets.only(right: 14.w),

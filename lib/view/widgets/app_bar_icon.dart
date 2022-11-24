@@ -1,4 +1,6 @@
+import 'package:darurat/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AppBarIcon extends StatelessWidget {
   final String image;
@@ -29,9 +31,15 @@ class AppBarIcon extends StatelessWidget {
             child: Container(
               height: 34,
               width: 34,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(image),
+              // decoration: BoxDecoration(
+              //   image: DecorationImage(
+              //     image: AssetImage(image),
+              //   ),
+              // ),
+              child: Consumer<ThemeProvider>(
+                builder: (context, themeProvider, child) => Image.asset(
+                  image,
+                  color: themeProvider.textTheme,
                 ),
               ),
             ),
