@@ -36,11 +36,9 @@ class AppBarIcon extends StatelessWidget {
               //     image: AssetImage(image),
               //   ),
               // ),
-              child: Consumer<ThemeProvider>(
-                builder: (context, themeProvider, child) => Image.asset(
-                  image,
-                  color: themeProvider.textTheme,
-                ),
+              child: Image.asset(
+                image,
+                color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
           ),

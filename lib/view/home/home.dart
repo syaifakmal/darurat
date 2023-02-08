@@ -1,12 +1,18 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:darurat/provider/theme_provider.dart';
 import 'package:darurat/utils/colors.dart';
 import 'package:darurat/utils/fonts.dart.dart';
 import 'package:darurat/utils/images.dart';
-import 'package:darurat/view/home/widgets/card_widget.dart';
+import 'package:darurat/view/empty_state/empty_state.dart';
+import 'package:darurat/view/widgets/card_widget.dart';
 import 'package:darurat/view/settings/settings.dart';
+import 'package:darurat/view/widgets/app_bar_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../widgets/app_bar_icon.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -16,17 +22,40 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final deviceInfoPlugin = DeviceInfoPlugin();
+  late var _allInfo;
+  String sdkVers = 'null';
+
+  void getInfo() async {
+    _allInfo = await deviceInfoPlugin.deviceInfo;
+    _allInfo = _allInfo.toMap();
+    setState(() {
+      sdkVers = _allInfo['version']['sdkInt'].toString();
+    });
+
+    // log(json.encode(_allInfo));
+  }
+
+  @override
+  void initState() {
+    getInfo();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      // backgroundColor: themeProvider.theme,
+      // resizeToAvoidBottomInset: false,
+      body:
+      SafeArea(
         child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           slivers: [
             SliverAppBar(
-              // backgroundColor: white,
               titleSpacing: 0,
-              elevation: 0,
+              elevation: 1,
+              forceElevated:true,
               floating: true,
               title: Padding(
                 padding: EdgeInsets.only(left: 16),
@@ -40,17 +69,19 @@ class _HomeState extends State<Home> {
                         child: TextField(
                           decoration: InputDecoration(
                               filled: true,
-                              fillColor: Theme.of(context).colorScheme.secondary,
-                              prefixIcon:
-                                  Image.asset(Images.iconSearch, scale: 3.5),
-                              contentPadding: EdgeInsets.only(right: 14.w),
+                              fillColor: Theme.of(context).backgroundColor,
+                              prefixIcon: Image.asset(
+                                Images.iconSearch,
+                                scale: 3.5,
+                                color: Theme.of(context).hintColor,
+                              ),
+                              contentPadding: const EdgeInsets.only(right: 14),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none,
                               ),
                               hintText: 'Search',
-                              hintStyle: Poppins.regular
-                                  .copyWith(fontSize: 15, color: grey)),
+                              hintStyle: FontStyle.regular.copyWith(fontSize: 14)),
                         ),
                       ),
                     ),
@@ -63,8 +94,7 @@ class _HomeState extends State<Home> {
                     ),
                     AppBarIcon(
                       Images.iconMenu,
-                      onTap: () => Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Settings())),
+                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Settings())),
                       tooltip: 'Settings',
                       leftPadding: 4,
                       rightPadding: 16,
@@ -75,13 +105,17 @@ class _HomeState extends State<Home> {
             ),
             SliverFillRemaining(
               hasScrollBody: false,
-              child: Column(
+              child:
+              // EmptyState(),
+              Column(
                 children: [
                   for (var i = 0; i < 20; i++)
                     CardTile(
-                        onTap: null,
-                        title: 'aasdasdasdasd',
-                        subtitle: 'subtitle')
+                      onTap: null,
+                      color: Colors.red,
+                      title: sdkVers,
+                      subtitle: 'subtitle',
+                    ),
                 ],
               ),
             )

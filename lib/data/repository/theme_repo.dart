@@ -1,4 +1,4 @@
-import 'package:darurat/utils/app_constants.dart';
+import 'package:darurat/utils/constants.dart';
 import 'package:darurat/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';

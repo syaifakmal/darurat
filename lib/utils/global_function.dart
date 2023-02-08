@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class GlobalFunction {
   ///Clear all SnackBars and hide keyboard
@@ -15,5 +16,10 @@ class GlobalFunction {
     final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
 
     return hslDark.toColor();
+  }
+
+  static Future<String> _loadJsonData(String jsonLocation) async {
+    ///assets/darurat-4ff47-default-rtdb-export.json
+    return await rootBundle.loadString(jsonLocation);
   }
 }

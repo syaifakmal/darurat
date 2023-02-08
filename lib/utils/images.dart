@@ -17,4 +17,7 @@ class Images {
   static const String imageLogo = 'assets/images/daruratLogo.png';
   static const String imageLogoText = 'assets/images/daruratLogoText.png';
   static const String imageLogoWithText = 'assets/images/daruratLogoWithText.png';
+  static const String imageLogoLight = 'assets/images/daruratLogoLight.png';
+  static const String imageLogoTextLight = 'assets/images/daruratLogoTextLight.png';
+  static const String imageLogoWithTextLight = 'assets/images/daruratLogoWithTextLight.png';
 }
