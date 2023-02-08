@@ -1,0 +1,70 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Call Center",
+      "number": "112",
+      "type": "emergency"
+    },
+    {
+      "id": 2,
+      "name": "Polisi",
+      "number": "110",
+      "type": "emergency"
+    },
+    {
+      "id": 3,
+      "name": "Ambulans",
+      "number": "118",
+      "type": "emergency"
+    },
+    {
+      "id": 4,
+      "name": "Pemadam Kebakaran",
+      "number": "113",
+      "type": "emergency"
+    },
+    {
+      "id": 5,
+      "name": "Search and Rescue (SAR)",
+      "number": "115",
+      "type": "emergency"
+    },
+    {
+      "id": 6,
+      "name": "Gangguan Listrik",
+      "number": "123",
+      "type": "emergency"
+    },
+    {
+      "id": 7,
+      "name": "Kemenkes & Hotline Covid - 19",
+      "number": "119",
+      "type": "emergency"
+    },
+    {
+      "id": 8,
+      "name": "Jangan Bunuh Diri",
+      "number": "0219696293",
+      "type": "suicide hotline"
+    },
+    {
+      "id": 9,
+      "name": "LISA",
+      "number": "08113855472",
+      "type": "suicide hotline"
+    },
+    {
+      "id": 10,
+      "name": "Halo Kemenkes",
+      "number": "1500 567",
+      "type": "mental help hotline"
+    },
+    {
+      "id": 11,
+      "name": "Yayasan Pulih",
+      "number": "02178842580",
+      "type": "mental help hotline"
+    }
+  ]
+}
