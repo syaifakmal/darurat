@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:darurat/data/model/emergency_contact_model.dart';
 import 'package:darurat/utils/constants.dart';
+import 'package:darurat/utils/global_function.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -33,14 +36,13 @@ class EmergencyDatabase {
   Future _createDB(Database db, int version) async {
     const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     const textType = 'TEXT NOT NULL';
+
     await db.execute('''
     CREATE TABLE ${Constant.emergencyContact} (
     ${EmergencyContactField.id} $idType,
     ${EmergencyContactField.name} $textType,
     ${EmergencyContactField.number} $textType,
     ${EmergencyContactField.type} $textType,
-    ${EmergencyContactField.createdTime} $textType,
-    ${EmergencyContactField.updatedTime} $textType,
     )
     ''');
 
@@ -50,10 +52,41 @@ class EmergencyDatabase {
     ${EmergencyContactField.name} $textType,
     ${EmergencyContactField.number} $textType,
     ${EmergencyContactField.type} $textType,
-    ${EmergencyContactField.createdTime} $textType,
-    ${EmergencyContactField.updatedTime} $textType,
     )
     ''');
+
+    final String _loadJson = await GlobalFunction.loadJsonData(Constant.daruratJsonPath);
+    final _jsonDecode = json.decode(_loadJson);
+
+    for (var data in _jsonDecode) {
+      await insert(Constant.emergencyContact, data);
+    }
+  }
+
+  Future<EmergencyContact> insert(String table, EmergencyContact emergencyContact) async {
+    final Database db = await instance.database;
+    final int id = await db.insert(table, emergencyContact.toJson());
+
+    return emergencyContact.copyWith(id: id);
+  }
+
+  Future<List<EmergencyContact>> getEmergencyContacts(String table) async {
+    final Database db = await instance.database;
+    final result = await db.query(table);
+
+    return result.map((json) => EmergencyContact.fromJson(json)).toList();
+  }
+
+  Future<EmergencyContact> update(String table, EmergencyContact emergencyContact) async {
+    final Database db = await instance.database;
+    final int id = await db.update(
+      table,
+      emergencyContact.toJson(),
+      where: '${EmergencyContactField.id} = ?',
+      whereArgs: [emergencyContact.id],
+    );
+
+    return emergencyContact.copyWith(id: id);
   }
 
   Future close() async {

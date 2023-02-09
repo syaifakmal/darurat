@@ -3,6 +3,7 @@ class Constant {
   static const database = 'emergency.db';
   static const emergencyContact = 'emergency_contact';
   static const userEmergencyContact = 'user_emergency_contact';
+  static const daruratJsonPath = 'assets/darurat-defult.json';
 
   /// sharePreference
   static const isDarkMode = 'isDarkMode';

@@ -18,7 +18,7 @@ class GlobalFunction {
     return hslDark.toColor();
   }
 
-  static Future<String> _loadJsonData(String jsonLocation) async {
+  static Future<String> loadJsonData(String jsonLocation) async {
     ///assets/darurat-4ff47-default-rtdb-export.json
     return await rootBundle.loadString(jsonLocation);
   }

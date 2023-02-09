@@ -3,7 +3,9 @@ import 'dart:developer';
 
 import 'package:darurat/provider/theme_provider.dart';
 import 'package:darurat/utils/colors.dart';
+import 'package:darurat/utils/constants.dart';
 import 'package:darurat/utils/fonts.dart.dart';
+import 'package:darurat/utils/global_function.dart';
 import 'package:darurat/utils/images.dart';
 import 'package:darurat/view/empty_state/empty_state.dart';
 import 'package:darurat/view/widgets/card_widget.dart';
@@ -32,7 +34,6 @@ class _HomeState extends State<Home> {
     setState(() {
       sdkVers = _allInfo['version']['sdkInt'].toString();
     });
-
     // log(json.encode(_allInfo));
   }
 
