@@ -3,14 +3,11 @@ import 'dart:convert';
 import 'package:darurat/data/model/emergency_contact_model.dart';
 import 'package:darurat/utils/constants.dart';
 import 'package:darurat/utils/global_function.dart';
-import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class EmergencyDatabase {
-  EmergencyDatabase._init() {
-    debugPrint('EmergencyDatabase created');
-  }
+  EmergencyDatabase._init();
 
   static final EmergencyDatabase _instance = EmergencyDatabase._init();
 
@@ -38,28 +35,33 @@ class EmergencyDatabase {
     const textType = 'TEXT NOT NULL';
 
     await db.execute('''
-    CREATE TABLE ${Constant.emergencyContact} (
-    ${EmergencyContactField.id} $idType,
-    ${EmergencyContactField.name} $textType,
-    ${EmergencyContactField.number} $textType,
-    ${EmergencyContactField.type} $textType,
-    )
-    ''');
+CREATE TABLE ${Constant.emergencyContact} (
+${EmergencyContactField.id} $idType,
+${EmergencyContactField.name} $textType,
+${EmergencyContactField.number} $textType,
+${EmergencyContactField.type} $textType
+)
+''');
 
     await db.execute('''
-    CREATE TABLE ${Constant.userEmergencyContact} (
-    ${EmergencyContactField.id} $idType,
-    ${EmergencyContactField.name} $textType,
-    ${EmergencyContactField.number} $textType,
-    ${EmergencyContactField.type} $textType,
-    )
-    ''');
+CREATE TABLE ${Constant.userEmergencyContact} (
+${EmergencyContactField.id} $idType,
+${EmergencyContactField.name} $textType,
+${EmergencyContactField.number} $textType,
+${EmergencyContactField.type} $textType
+)
+''');
 
     final String _loadJson = await GlobalFunction.loadJsonData(Constant.daruratJsonPath);
     final _jsonDecode = json.decode(_loadJson);
 
-    for (var data in _jsonDecode) {
-      await insert(Constant.emergencyContact, data);
+    try {
+      for (var data in _jsonDecode['data']) {
+        EmergencyContact _emergencyContact = EmergencyContact.fromJson(data);
+        await db.insert(Constant.emergencyContact, _emergencyContact.toJson());
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -73,6 +75,7 @@ class EmergencyDatabase {
   Future<List<EmergencyContact>> getEmergencyContacts(String table) async {
     final Database db = await instance.database;
     final result = await db.query(table);
+    print(result);
 
     return result.map((json) => EmergencyContact.fromJson(json)).toList();
   }
@@ -87,6 +90,15 @@ class EmergencyDatabase {
     );
 
     return emergencyContact.copyWith(id: id);
+  }
+
+  Future<int> delete(String table, int id) async {
+    final Database db = await instance.database;
+    return await db.delete(
+      table,
+      where: '${EmergencyContactField.id} = ?',
+      whereArgs: [id],
+    );
   }
 
   Future close() async {

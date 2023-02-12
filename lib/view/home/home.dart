@@ -1,20 +1,13 @@
-import 'dart:convert';
-import 'dart:developer';
 
-import 'package:darurat/provider/theme_provider.dart';
-import 'package:darurat/utils/colors.dart';
+import 'package:darurat/data/datasource/emergency_db.dart';
+import 'package:darurat/data/model/emergency_contact_model.dart';
 import 'package:darurat/utils/constants.dart';
 import 'package:darurat/utils/fonts.dart.dart';
-import 'package:darurat/utils/global_function.dart';
 import 'package:darurat/utils/images.dart';
-import 'package:darurat/view/empty_state/empty_state.dart';
 import 'package:darurat/view/widgets/card_widget.dart';
 import 'package:darurat/view/settings/settings.dart';
 import 'package:darurat/view/widgets/app_bar_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -24,23 +17,28 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final deviceInfoPlugin = DeviceInfoPlugin();
-  late var _allInfo;
-  String sdkVers = 'null';
+  List<EmergencyContact> list = [];
 
   void getInfo() async {
-    _allInfo = await deviceInfoPlugin.deviceInfo;
-    _allInfo = _allInfo.toMap();
-    setState(() {
-      sdkVers = _allInfo['version']['sdkInt'].toString();
-    });
+    print('asdasd');
+    try {
+      list = await EmergencyDatabase.instance.getEmergencyContacts(Constant.emergencyContact);
+    } catch (e) {
+      print('asdasasdad$e');
+    }
+
+    print('asdasasdad');
+    for (var element in list) {
+      print(element.toJson());
+    }
+    setState(() {});
     // log(json.encode(_allInfo));
   }
 
   @override
   void initState() {
-    getInfo();
     super.initState();
+    getInfo();
   }
 
   @override
@@ -48,15 +46,14 @@ class _HomeState extends State<Home> {
     return Scaffold(
       // backgroundColor: themeProvider.theme,
       // resizeToAvoidBottomInset: false,
-      body:
-      SafeArea(
+      body: SafeArea(
         child: CustomScrollView(
           physics: BouncingScrollPhysics(),
           slivers: [
             SliverAppBar(
               titleSpacing: 0,
               elevation: 1,
-              forceElevated:true,
+              forceElevated: true,
               floating: true,
               title: Padding(
                 padding: EdgeInsets.only(left: 16),
@@ -107,14 +104,14 @@ class _HomeState extends State<Home> {
             SliverFillRemaining(
               hasScrollBody: false,
               child:
-              // EmptyState(),
-              Column(
+                  // EmptyState(),
+                  Column(
                 children: [
-                  for (var i = 0; i < 20; i++)
+                  for (var i = 0; i < list.length; i++)
                     CardTile(
                       onTap: null,
                       color: Colors.red,
-                      title: sdkVers,
+                      title: list[i].name,
                       subtitle: 'subtitle',
                     ),
                 ],
