@@ -1,4 +1,4 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darurat/data/datasource/emergency_db.dart';
 import 'package:darurat/data/model/emergency_contact_model.dart';
 import 'package:darurat/utils/constants.dart';
@@ -22,12 +22,10 @@ class _HomeState extends State<Home> {
 
   void getInfo() async {
     try {
-      list = await EmergencyDatabase.instance.getEmergencyContacts(Constant.emergencyContact);
+      list = await EmergencyDatabase.instance.getEmergencyContacts(Constant.database.emergencyContactTable);
     } catch (e) {
-      print('asdasasdad$e');
+      print('getInfo $e');
     }
-
-    print('asdasasdad');
     for (var element in list) {
       print(element.toJson());
     }
@@ -52,7 +50,7 @@ class _HomeState extends State<Home> {
           slivers: [
             SliverAppBar(
               titleSpacing: 0,
-              elevation: 1,
+              elevation: .5,
               forceElevated: true,
               floating: true,
               title: Padding(
@@ -85,14 +83,17 @@ class _HomeState extends State<Home> {
                     ),
                     AppBarIcon(
                       Images.iconAdd,
-                      onTap: () => debugPrint('tapped!'),
+                      onTap: () async {
+                        CollectionReference doc = FirebaseFirestore.instance.collection(Constant.fireStore.emergencyContact);
+                        print(doc.runtimeType);
+                      },
                       tooltip: 'Add',
                       leftPadding: 8,
                       rightPadding: 4,
                     ),
                     AppBarIcon(
                       Images.iconMenu,
-                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Settings())),
+                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen())),
                       tooltip: 'Settings',
                       leftPadding: 4,
                       rightPadding: 16,

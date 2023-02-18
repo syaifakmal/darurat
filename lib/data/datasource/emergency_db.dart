@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:darurat/data/model/emergency_contact_model.dart';
 import 'package:darurat/utils/constants.dart';
 import 'package:darurat/utils/global_function.dart';
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -19,7 +20,7 @@ class EmergencyDatabase {
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await _initDB(Constant.database);
+    _database = await _initDB(Constant.database.databaseName);
     return _database!;
   }
 
@@ -35,33 +36,43 @@ class EmergencyDatabase {
     const textType = 'TEXT NOT NULL';
 
     await db.execute('''
-CREATE TABLE ${Constant.emergencyContact} (
+CREATE TABLE ${Constant.database.emergencyContactTable} (
 ${EmergencyContactField.id} $idType,
 ${EmergencyContactField.name} $textType,
 ${EmergencyContactField.number} $textType,
-${EmergencyContactField.type} $textType
+${EmergencyContactField.type} $textType,
+${EmergencyContactField.createdTime} $textType,
+${EmergencyContactField.updatedTime} $textType
 )
 ''');
 
     await db.execute('''
-CREATE TABLE ${Constant.userEmergencyContact} (
+CREATE TABLE ${Constant.database.userEmergencyContactTable} (
 ${EmergencyContactField.id} $idType,
 ${EmergencyContactField.name} $textType,
 ${EmergencyContactField.number} $textType,
-${EmergencyContactField.type} $textType
+${EmergencyContactField.type} $textType,
+${EmergencyContactField.createdTime} $textType,
+${EmergencyContactField.updatedTime} $textType
 )
 ''');
 
-    final String _loadJson = await GlobalFunction.loadJsonData(Constant.daruratJsonPath);
+    final String _loadJson = await GlobalFunction.loadJsonData(Constant.database.initialJsonData);
     final _jsonDecode = json.decode(_loadJson);
 
     try {
       for (var data in _jsonDecode['data']) {
         EmergencyContact _emergencyContact = EmergencyContact.fromJson(data);
-        await db.insert(Constant.emergencyContact, _emergencyContact.toJson());
+        Map<String, dynamic> _emergencyJson = _emergencyContact
+            .copyWith(
+              createdTime: DateTime.now(),
+              updatedTime: DateTime.now(),
+            )
+            .toJson();
+        await db.insert(Constant.database.emergencyContactTable, _emergencyJson);
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 

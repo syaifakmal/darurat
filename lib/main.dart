@@ -2,6 +2,7 @@ import 'package:darurat/data/repository/theme_repo.dart';
 import 'package:darurat/provider/theme_provider.dart';
 import 'package:darurat/utils/themes.dart';
 import 'package:darurat/view/home/home.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   // SystemChrome.setSystemUIOverlayStyle(
   //   SystemUiOverlayStyle(
   //     statusBarColor: Colors.transparent,
