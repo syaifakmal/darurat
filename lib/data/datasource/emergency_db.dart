@@ -75,7 +75,6 @@ ${EmergencyContactField.type} $textType
   Future<List<EmergencyContact>> getEmergencyContacts(String table) async {
     final Database db = await instance.database;
     final result = await db.query(table);
-    print(result);
 
     return result.map((json) => EmergencyContact.fromJson(json)).toList();
   }

@@ -1,4 +1,4 @@
-package com.example.darurat
+package com.darurat.emergency
 
 import io.flutter.embedding.android.FlutterActivity
 

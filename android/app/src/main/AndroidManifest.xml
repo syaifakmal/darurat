@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.darurat">
+    package="com.darurat.emergency">
    <application
-        android:label="darurat"
+        android:label="Darurat"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

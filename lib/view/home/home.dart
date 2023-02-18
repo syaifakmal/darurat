@@ -8,6 +8,7 @@ import 'package:darurat/view/widgets/card_widget.dart';
 import 'package:darurat/view/settings/settings.dart';
 import 'package:darurat/view/widgets/app_bar_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,7 +21,6 @@ class _HomeState extends State<Home> {
   List<EmergencyContact> list = [];
 
   void getInfo() async {
-    print('asdasd');
     try {
       list = await EmergencyDatabase.instance.getEmergencyContacts(Constant.emergencyContact);
     } catch (e) {
@@ -112,7 +112,7 @@ class _HomeState extends State<Home> {
                       onTap: null,
                       color: Colors.red,
                       title: list[i].name,
-                      subtitle: 'subtitle',
+                      subtitle: list[i].number,
                     ),
                 ],
               ),
