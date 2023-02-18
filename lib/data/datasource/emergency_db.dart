@@ -72,7 +72,7 @@ ${EmergencyContactField.updatedTime} $textType
         await db.insert(Constant.database.emergencyContactTable, _emergencyJson);
       }
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('initialize data $e');
     }
   }
 

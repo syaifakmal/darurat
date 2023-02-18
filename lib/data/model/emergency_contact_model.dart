@@ -43,8 +43,8 @@ class EmergencyContact {
         name: json["name"],
         number: json["number"],
         type: json["type"],
-        createdTime: DateTime.parse(json["createdTime"]),
-        updatedTime: DateTime.parse(json["updatedTime"]),
+        createdTime: json["createdTime"] != null ? DateTime.parse(json["createdTime"]) : null,
+        updatedTime: json["updatedTime"] != null ? DateTime.parse(json["updatedTime"]) : null,
       );
 
   Map<String, dynamic> toJson() => {
