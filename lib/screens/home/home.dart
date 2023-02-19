@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darurat/data/datasource/emergency_db.dart';
 import 'package:darurat/data/model/emergency_contact_model.dart';
 import 'package:darurat/provider/data_provider.dart';
+import 'package:darurat/screens/home/widgets/listEmergency.dart';
 import 'package:darurat/utils/colors.dart';
 import 'package:darurat/utils/constants.dart';
 import 'package:darurat/utils/fonts.dart.dart';
@@ -12,6 +13,7 @@ import 'package:darurat/screens/widgets/app_bar_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -21,10 +23,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   late DataProvider _dataProvider;
 
   void _init() async {
+    _dataProvider.getData();
     // log(json.encode(_allInfo));
   }
 
@@ -42,7 +44,6 @@ class _HomeState extends State<Home> {
       // resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: CustomScrollView(
-          physics: BouncingScrollPhysics(),
           slivers: [
             SliverAppBar(
               titleSpacing: 0,
@@ -98,33 +99,14 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-            SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-              sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    return Column(
-                      children: [
-                        Text(_dataProvider.emergencyTypes[index], style: FontStyle.medium.copyWith(fontSize: 12),),
-                      ],
-                    );
-                  }, childCount: _dataProvider.emergencyTypes.length)),
+            SliverList(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                return ListEmergency(
+                  listData: _dataProvider.listData.where((emergency) => emergency.type == _dataProvider.emergencyTypes[index].toLowerCase()).toList(),
+                  title: _dataProvider.emergencyTypes[index],
+                );
+              }, childCount: _dataProvider.emergencyTypes.length),
             )
-            // SliverFillRemaining(
-            //   hasScrollBody: false,
-            //   child:
-            //       // EmptyState(),
-            //       Column(
-            //     children: [
-            //       for (var i = 0; i < list.length; i++)
-            //         CardTile(
-            //           onTap: null,
-            //           color: Colors.red,
-            //           title: list[i].name,
-            //           subtitle: list[i].number,
-            //         ),
-            //     ],
-            //   ),
-            // )
           ],
         ),
       ),

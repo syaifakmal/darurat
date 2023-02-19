@@ -13,11 +13,14 @@ class DataProvider extends ChangeNotifier {
   List<EmergencyContact> get suicideHotlines => _suicideHotlines;
   List<EmergencyContact> _suicideHotlines = [];
 
+  List<EmergencyContact> get listData => _listData;
+  List<EmergencyContact> _listData = [];
+
   List emergencyTypes = ['Emergency', 'Mental Help Hotline', 'Suicide Hotline'];
 
   Future<void> getData() async {
-    List<EmergencyContact> _emergencyContacts = await EmergencyDatabase.instance.getEmergencyContacts(Constant.database.emergencyContactTable);
-    for (EmergencyContact emergency in _emergencyContacts) {
+    _listData = await EmergencyDatabase.instance.getEmergencyContacts(Constant.database.emergencyContactTable);
+    for (EmergencyContact emergency in _listData) {
       if (emergency.type == 'emergency') {
         emergencies.add(emergency);
       }

@@ -14,6 +14,7 @@ class CardTile extends StatelessWidget {
   final String? icon;
   final String? icon2;
   final Color color;
+  final EdgeInsetsGeometry padding;
 
   const CardTile({
     Key? key,
@@ -24,6 +25,7 @@ class CardTile extends StatelessWidget {
     required this.title,
     this.subtitle,
     this.color = black,
+    this.padding = const EdgeInsets.symmetric(horizontal: 16),
   }) : super(key: key);
 
   Widget _withIcon(BuildContext context) {
@@ -33,7 +35,7 @@ class CardTile extends StatelessWidget {
       child: Container(
         // color: white,
         width: Size.flexibleWidth(context, 100),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: padding,
         height: 60,
         child: Consumer<ThemeProvider>(
           builder: (context, themeProvider, child) => Row(
@@ -98,7 +100,7 @@ class CardTile extends StatelessWidget {
       child: Container(
         // color: white,
         width: Size.flexibleWidth(context, 100),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: padding,
         height: 60,
         child: Consumer<ThemeProvider>(
           builder: (context, themeProvider, child) => Row(
