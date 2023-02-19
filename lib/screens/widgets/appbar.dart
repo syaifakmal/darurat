@@ -1,5 +1,5 @@
+import 'package:darurat/utils/fonts.dart.dart';
 import 'package:flutter/material.dart';
-import 'package:kai_passenger_app/utils/fonts.dart.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String? title;
@@ -68,7 +68,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             widget.title != null
                 ? Text(
                     widget.title!,
-                    style: Poppins.medium.copyWith(fontSize: 16, color: Colors.black),
+                    style: FontStyle.medium.copyWith(fontSize: 16, color: Colors.black),
                   )
                 : Container(),
             const Spacer(),

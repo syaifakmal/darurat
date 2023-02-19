@@ -1,7 +1,8 @@
 import 'package:darurat/data/repository/theme_repo.dart';
+import 'package:darurat/provider/data_provider.dart';
 import 'package:darurat/provider/theme_provider.dart';
 import 'package:darurat/utils/themes.dart';
-import 'package:darurat/view/home/home.dart';
+import 'package:darurat/screens/home/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,6 +26,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider(themeRepo: ThemeRepo(sharedPreferences))),
+        ChangeNotifierProvider(create: (_) => DataProvider()),
       ],
       child: const MyApp(),
     ),

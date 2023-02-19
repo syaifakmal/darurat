@@ -2,7 +2,7 @@ import 'package:darurat/utils/colors.dart';
 import 'package:darurat/utils/fonts.dart.dart';
 import 'package:darurat/utils/images.dart';
 import 'package:darurat/utils/size.dart';
-import 'package:darurat/view/widgets/card_widget.dart';
+import 'package:darurat/screens/widgets/card_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

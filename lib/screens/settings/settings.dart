@@ -3,8 +3,8 @@ import 'package:darurat/utils/colors.dart';
 import 'package:darurat/utils/fonts.dart.dart';
 import 'package:darurat/utils/images.dart';
 import 'package:darurat/utils/size.dart';
-import 'package:darurat/view/widgets/card_widget.dart';
-import 'package:darurat/view/widgets/app_bar_icon.dart';
+import 'package:darurat/screens/widgets/card_widget.dart';
+import 'package:darurat/screens/widgets/app_bar_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
