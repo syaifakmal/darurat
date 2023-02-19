@@ -26,7 +26,6 @@ class _HomeState extends State<Home> {
   late DataProvider _dataProvider;
 
   void _init() async {
-    _dataProvider.getData();
     // log(json.encode(_allInfo));
   }
 

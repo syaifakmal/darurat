@@ -1,6 +1,7 @@
 import 'package:darurat/data/repository/theme_repo.dart';
 import 'package:darurat/provider/data_provider.dart';
 import 'package:darurat/provider/theme_provider.dart';
+import 'package:darurat/screens/splash_screen/splash_screen.dart';
 import 'package:darurat/utils/themes.dart';
 import 'package:darurat/screens/home/home.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
     final ThemeProvider _themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const Home(),
+      home: const SplashScreen(),
       themeMode: _themeProvider.themeMode,
       darkTheme: Themes.darkTheme,
       theme: Themes.lightTheme,

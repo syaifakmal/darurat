@@ -108,7 +108,7 @@ class CardTile extends StatelessWidget {
             children: [
               SizedBox(
                 // color: Colors.orange,
-                width: Size.flexibleWidth(context, 45),
+                width: Size.flexibleWidth(context, 50),
                 child: Text(
                   title!,
                   style: FontStyle.medium.copyWith(
