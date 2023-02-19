@@ -65,11 +65,15 @@ class _HomeState extends State<Home> {
                         child: TextField(
                           decoration: InputDecoration(
                               filled: true,
-                              fillColor: Theme.of(context).backgroundColor,
+                              fillColor: Theme
+                                  .of(context)
+                                  .backgroundColor,
                               prefixIcon: Image.asset(
                                 Images.iconSearch,
                                 scale: 3.5,
-                                color: Theme.of(context).hintColor,
+                                color: Theme
+                                    .of(context)
+                                    .hintColor,
                               ),
                               contentPadding: const EdgeInsets.only(right: 14),
                               border: OutlineInputBorder(
@@ -105,8 +109,8 @@ class _HomeState extends State<Home> {
             SliverFillRemaining(
               hasScrollBody: false,
               child:
-                  // EmptyState(),
-                  Column(
+              // EmptyState(),
+              Column(
                 children: [
                   for (var i = 0; i < list.length; i++)
                     CardTile(

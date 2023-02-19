@@ -36,6 +36,7 @@ class AppConfig {
   final String appVersion = '1.0.0';
   final String appName = 'Darurat';
   final String deviceOS = Platform.isAndroid ? 'Android' : 'IOS';
+  // static final bool isDevelopment = true;
 }
 
 class DatabaseDetails {
