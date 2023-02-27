@@ -1,7 +1,7 @@
 import 'package:darurat/data/model/emergency_contact_model.dart';
 import 'package:darurat/screens/widgets/card_widget.dart';
-import 'package:darurat/utils/colors.dart';
 import 'package:darurat/utils/fonts.dart.dart';
+import 'package:darurat/utils/global_function.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -30,7 +30,7 @@ class ListEmergency extends StatelessWidget {
           padding: const EdgeInsets.only(left: 16, right: 16, top: 15),
           child: Text(
             title,
-            style: FontStyle.medium.copyWith(fontSize: 12, color: const Color(0XFF6E6F73)),
+            style: Poppins.medium.copyWith(fontSize: 12, color: const Color(0XFF6E6F73)),
           ),
         ),
         ListView.builder(
@@ -48,7 +48,19 @@ class ListEmergency extends StatelessWidget {
                 print('object');
               },
               title: listData[index].name,
-              subtitle: listData[index].number,
+              trailing: SizedBox(
+                width: GlobalFunction.flexibleWidth(context, 30),
+                child: Text(
+                  listData[index].number,
+                  style: Poppins.regular.copyWith(
+                    fontSize: 14,
+                    // color: themeProvider.textTheme,
+                  ),
+                  textAlign: TextAlign.right,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             );
           },
         ),

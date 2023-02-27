@@ -7,14 +7,15 @@ class Themes {
     primaryColor: black,
     hintColor: secondaryTextDark,
     backgroundColor: secondaryBackgroundDark,
+    useMaterial3:true,
     colorScheme: const ColorScheme.dark(
-      primary: Colors.red,
+      primary: white,
       onPrimary: white,
     ),
     textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: red,
+      cursorColor: blue,
       selectionColor: Colors.grey,
-      selectionHandleColor: red,
+      selectionHandleColor: blue,
     ),
     scaffoldBackgroundColor: black,
   );
@@ -24,14 +25,15 @@ class Themes {
     primaryColor: white,
     hintColor: secondaryTextLight,
     backgroundColor: secondaryBackgroundLight,
+    useMaterial3:true,
     colorScheme: const ColorScheme.light(
-      primary: red,
+      primary: black,
       onPrimary: black,
     ),
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: red,
+      cursorColor: blue,
       selectionColor: Colors.grey.shade400,
-      selectionHandleColor: red,
+      selectionHandleColor: blue,
     ),
     // cursorColor: Colors.blue,
     scaffoldBackgroundColor: white,

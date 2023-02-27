@@ -1,7 +1,4 @@
-import 'package:darurat/provider/theme_provider.dart';
-import 'package:darurat/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class AppBarIcon extends StatelessWidget {
   final String image;
@@ -9,6 +6,7 @@ class AppBarIcon extends StatelessWidget {
   final String? tooltip;
   final double leftPadding;
   final double rightPadding;
+  final Color? color;
 
   const AppBarIcon(
     this.image, {
@@ -16,6 +14,7 @@ class AppBarIcon extends StatelessWidget {
     this.tooltip,
     this.leftPadding = 0,
     this.rightPadding = 0,
+    this.color,
     Key? key,
   }) : super(key: key);
 
@@ -39,7 +38,7 @@ class AppBarIcon extends StatelessWidget {
               // ),
               child: Image.asset(
                 image,
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: color ?? Theme.of(context).colorScheme.onPrimary,
               ),
             ),
           ),

@@ -61,12 +61,12 @@ class _AlertContentState extends State<AlertContent> {
             Align(
               child: Text(
                 widget.title,
-                style: FontStyle.semiBold.copyWith(fontSize: 18, color: Colors.black87),
+                style: Poppins.semiBold.copyWith(fontSize: 18, color: Colors.black87),
               ),
             ),
             Text(
               widget.subtitle,
-              style: FontStyle.regular.copyWith(fontSize: 11, color: Colors.black87),
+              style: Poppins.regular.copyWith(fontSize: 11, color: Colors.black87),
               textAlign: TextAlign.center,
             ),
             // Container(

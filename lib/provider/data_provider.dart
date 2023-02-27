@@ -21,8 +21,6 @@ class DataProvider extends ChangeNotifier {
 
   final CollectionReference _firebaseAppVersion = FirebaseFirestore.instance.collection(Constant.fireStore.appVersion);
 
-  List emergencyTypes = ['Emergency', 'Mental Help Hotline', 'Suicide Hotline'];
-
   Future<void> checkVersion() async {
     final _appVersionDoc = await _firebaseAppVersion.doc('1').get();
     try {

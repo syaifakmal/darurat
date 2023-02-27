@@ -20,4 +20,6 @@ class Images {
   static const String imageLogoLight = 'assets/images/daruratLogoLight.png';
   static const String imageLogoTextLight = 'assets/images/daruratLogoTextLight.png';
   static const String imageLogoWithTextLight = 'assets/images/daruratLogoWithTextLight.png';
+  static const String imageIndonesiaFlag = 'assets/images/indonesiaFlag.png';
+  static const String imageEnglishFlag = 'assets/images/englishFlag.png';
 }

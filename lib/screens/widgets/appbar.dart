@@ -68,7 +68,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             widget.title != null
                 ? Text(
                     widget.title!,
-                    style: FontStyle.medium.copyWith(fontSize: 16, color: Colors.black),
+                    style: Poppins.medium.copyWith(fontSize: 16, color: Colors.black),
                   )
                 : Container(),
             const Spacer(),

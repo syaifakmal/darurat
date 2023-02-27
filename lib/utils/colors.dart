@@ -6,6 +6,7 @@ const Color lightGrey = Color(0xFFEFEFEF);
 const Color grey = Color(0xFF575757);
 const Color black = Color(0xFF171717);
 const Color red = Color(0xFFDC141F);
+const Color blue = Color(0xFF1189D9);
 
 const Color secondaryBackgroundLight = Color(0xFFEFEFEF);
 const Color secondaryTextLight = Color(0xFF838383);

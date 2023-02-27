@@ -2,7 +2,7 @@
   "data": [
     {
       "id": 1,
-      "name": "Darurat",
+      "name": "Call Center",
       "number": "112",
       "type": "emergency"
     },

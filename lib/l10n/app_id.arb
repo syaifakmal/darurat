@@ -1,0 +1,31 @@
+{
+  "language": "Indonesia",
+  "english": "Bahasa Inggris",
+  "indonesia": "Indonesia",
+  "emergency": "Darurat",
+  "mentalHelpHotline": "Hotline Bantuan Kesehatan Mental",
+  "suicideHotline": "Hotline Pencegahan Bunuh Diri",
+  "setting": "Pengaturan",
+  "darkMode": "Mode Gelap",
+  "lightMode": "Mode Terang",
+  "languageSetting": "Bahasa",
+  "languageSettingTitle": "Pengaturan Bahasa",
+  "reportInactiveContact": "Laporkan Nomor Tidak Aktif",
+  "submitContact": "Bagikan Kontak Darurat",
+  "search": "Cari kontak",
+  "addEmergencyContact": "Tambahkan Kontak Darurat",
+  "addYourOwnContact": "Daftarkan kontak darurat Anda",
+  "addYourOwnContactDesc": "Kontak darurat pribadi dapat memberikan dukungan tambahan dalam situasi darurat dan membuat Anda lebih aman dan terlindungi.",
+  "name": "Nama",
+  "number": "Nomor Kontak",
+  "greeting": "Halo, {name}!",
+  "@greeting": {
+    "description": "Greet the user by their name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Budi"
+      }
+    }
+  }
+}

@@ -27,6 +27,8 @@ class Constant {
 
   /// sharePreference
   static const isDarkMode = 'isDarkMode';
+  static const languageCode = 'languageCode';
+  static const countryCode = 'countryCode';
 
   ///error msg
   static const connectionFailedMsg = 'Connection failed, please check your internet connection';
