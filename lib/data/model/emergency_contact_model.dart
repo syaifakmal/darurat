@@ -38,22 +38,24 @@ class EmergencyContact {
         updatedTime: updatedTime ?? this.updatedTime,
       );
 
-  factory EmergencyContact.fromJson(Map<String, dynamic> json) => EmergencyContact(
-        id: json["id"],
-        name: json["name"],
-        number: json["number"],
-        type: json["type"],
-        createdTime: json["createdTime"] != null ? DateTime.parse(json["createdTime"]) : null,
-        updatedTime: json["updatedTime"] != null ? DateTime.parse(json["updatedTime"]) : null,
-      );
+  factory EmergencyContact.fromJson(Map<String, dynamic> json) {
+    return EmergencyContact(
+      id: json["id"],
+      name: json["name"],
+      number: json["number"],
+      type: json["type"],
+      createdTime: json["createdTime"] != null ? DateTime.parse(json["createdTime"]) : null,
+      updatedTime: json["updatedTime"] != null ? DateTime.parse(json["updatedTime"]) : null,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         EmergencyContactField.id: id,
         EmergencyContactField.name: name,
         EmergencyContactField.number: number,
         EmergencyContactField.type: type,
-        EmergencyContactField.createdTime: createdTime.toString(),
-        EmergencyContactField.updatedTime: updatedTime.toString(),
+        EmergencyContactField.createdTime: createdTime?.toString(),
+        EmergencyContactField.updatedTime: updatedTime?.toString(),
       };
 }
 

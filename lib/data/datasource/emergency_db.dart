@@ -33,27 +33,28 @@ class EmergencyDatabase {
 
   Future _createDB(Database db, int version) async {
     const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    const textType = 'TEXT NOT NULL';
+    const textTypeNotNull = 'TEXT NOT NULL';
+    const textTypeNull = 'TEXT NULL';
 
     await db.execute('''
 CREATE TABLE ${Constant.database.emergencyContactTable} (
 ${EmergencyContactField.id} $idType,
-${EmergencyContactField.name} $textType,
-${EmergencyContactField.number} $textType,
-${EmergencyContactField.type} $textType,
-${EmergencyContactField.createdTime} $textType,
-${EmergencyContactField.updatedTime} $textType
+${EmergencyContactField.name} $textTypeNotNull,
+${EmergencyContactField.number} $textTypeNotNull,
+${EmergencyContactField.type} $textTypeNotNull,
+${EmergencyContactField.createdTime} $textTypeNull,
+${EmergencyContactField.updatedTime} $textTypeNull
 )
 ''');
 
     await db.execute('''
 CREATE TABLE ${Constant.database.userEmergencyContactTable} (
 ${EmergencyContactField.id} $idType,
-${EmergencyContactField.name} $textType,
-${EmergencyContactField.number} $textType,
-${EmergencyContactField.type} $textType,
-${EmergencyContactField.createdTime} $textType,
-${EmergencyContactField.updatedTime} $textType
+${EmergencyContactField.name} $textTypeNotNull,
+${EmergencyContactField.number} $textTypeNotNull,
+${EmergencyContactField.type} $textTypeNotNull,
+${EmergencyContactField.createdTime} $textTypeNull,
+${EmergencyContactField.updatedTime} $textTypeNull
 )
 ''');
 

@@ -16,8 +16,11 @@
   "addEmergencyContact": "Tambahkan Kontak Darurat",
   "addYourOwnContact": "Daftarkan kontak darurat Anda",
   "addYourOwnContactDesc": "Kontak darurat pribadi dapat memberikan dukungan tambahan dalam situasi darurat dan membuat Anda lebih aman dan terlindungi.",
+  "yourEmergencyContact": "Kontak Emergensi Kamu",
+  "shareYourContact": "Bagikan kontak kamu",
   "name": "Nama",
   "number": "Nomor Kontak",
+  "fieldRequired": "Kolom {label} dibutuhkan",
   "greeting": "Halo, {name}!",
   "@greeting": {
     "description": "Greet the user by their name.",

@@ -3,23 +3,18 @@ import 'package:darurat/screens/widgets/card_widget.dart';
 import 'package:darurat/utils/fonts.dart.dart';
 import 'package:darurat/utils/global_function.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ListEmergency extends StatelessWidget {
   final String title;
   final List<EmergencyContact> listData;
+  final Function? onLongPress;
 
-  const ListEmergency({Key? key, required this.title, required this.listData}) : super(key: key);
-
-
-  Future<void> _callPhone(String phoneNumber) async {
-    Uri _uri = Uri.parse('tel:$phoneNumber');
-    if (await canLaunchUrl(_uri)) {
-      await launchUrl(_uri);
-    } else {
-      throw 'Could not call $phoneNumber';
-    }
-  }
+  const ListEmergency({
+    Key? key,
+    required this.title,
+    required this.listData,
+    this.onLongPress,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +37,13 @@ class ListEmergency extends StatelessWidget {
           itemBuilder: (context, index) {
             return CardTile(
               onTap: () async {
-                await _callPhone(listData[index].number);
+                await GlobalFunction.dialNumber(listData[index].number);
               },
-              onLongPress: (){
-                print('object');
-              },
+              onLongPress: onLongPress != null
+                  ? () {
+                      onLongPress!(listData[index]);
+                    }
+                  : null,
               title: listData[index].name,
               trailing: SizedBox(
                 width: GlobalFunction.flexibleWidth(context, 30),

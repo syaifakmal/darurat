@@ -1,9 +1,14 @@
+import 'package:darurat/screens/widgets/custom_button.dart';
+import 'package:darurat/utils/colors.dart';
 import 'package:darurat/utils/fonts.dart.dart';
 import 'package:flutter/material.dart';
 
+
 class AlertContent extends StatefulWidget {
   final String title;
-  final String subtitle;
+  final String desc;
+  final CustomButtonStyle customButtonStyle;
+  final Widget? content;
   final String? confirmText;
   final String? cancelText;
   final bool isSingleButton;
@@ -14,13 +19,15 @@ class AlertContent extends StatefulWidget {
   const AlertContent({
     Key? key,
     required this.title,
-    required this.subtitle,
+    required this.desc,
     this.confirmText,
     this.cancelText,
     this.isSingleButton = false,
     this.isReverseButton = false,
     this.onConfirm,
     this.onCancel,
+    this.content,
+    this.customButtonStyle = CustomButtonStyle.filled,
   }) : super(key: key);
 
   @override
@@ -46,28 +53,62 @@ class _AlertContentState extends State<AlertContent> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      borderRadius: BorderRadius.circular(6),
+      borderRadius: BorderRadius.circular(15),
       color: Colors.white,
       child: Container(
         width: MediaQuery.of(context).size.width * .75,
-        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        decoration: BoxDecoration(),
+        padding: EdgeInsets.only(top: 20, bottom: 14),
+        // decoration: BoxDecoration(),
         child: Wrap(
           // direction: Axis.vertical,
-          runSpacing: 5,
+          runSpacing: 8,
           alignment: WrapAlignment.center,
           // runAlignment: WrapAlignment.spaceAround,
           children: [
-            Align(
+            Text(
+              widget.title,
+              style: Poppins.semiBold.copyWith(fontSize: 18, color: black),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                widget.title,
-                style: Poppins.semiBold.copyWith(fontSize: 18, color: Colors.black87),
+                widget.desc,
+                style: Poppins.regular.copyWith(fontSize: 12, color: secondaryTextLight),
+                textAlign: TextAlign.center,
               ),
             ),
-            Text(
-              widget.subtitle,
-              style: Poppins.regular.copyWith(fontSize: 11, color: Colors.black87),
-              textAlign: TextAlign.center,
+            const SizedBox(
+              width: double.infinity,
+            ),
+            widget.content ?? Container(),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 5),
+              child: widget.isSingleButton
+                  ? CustomButton(
+                      buttonStyle: widget.customButtonStyle,
+                      buttonText: _confirmText,
+                      onTap: _onConfirm,
+                    )
+                  : Row(
+                      children: [
+                        Expanded(
+                          child: CustomButton(
+                            buttonStyle: CustomButtonStyle.filled,
+                            buttonText: _confirmText,
+                            onTap: _onConfirm,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: CustomButton(
+                            buttonStyle: CustomButtonStyle.transparent,
+                            buttonText: _cancelText,
+                            onTap: _onCancel,
+                          ),
+                        )
+                      ],
+                    ),
             ),
             // Container(
             //   margin: EdgeInsets.only(top: 10),

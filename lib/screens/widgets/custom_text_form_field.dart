@@ -1,6 +1,7 @@
 import 'package:darurat/utils/fonts.dart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
@@ -58,7 +59,7 @@ class CustomTextFormField extends StatelessWidget {
             // String pattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
             // RegExp regex = RegExp(pattern);
             if (value!.isEmpty) {
-              return 'Kolom $prefixText dibutuhkan';
+              return AppLocalizations.of(context)!.fieldRequired(labelText!);
             }
             // if (value.isNotEmpty && !regex.hasMatch(value)) {
             //   return 'Please enter a valid email';

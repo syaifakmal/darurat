@@ -38,7 +38,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => di.sl<ThemeProvider>()),
-        ChangeNotifierProvider(create: (context) => di.sl<DataProvider>()),
+        ChangeNotifierProvider(create: (context) => di.sl<EmergencyContactProvider>()),
         ChangeNotifierProvider(create: (context) => di.sl<LocaleProvider>()),
       ],
       child: const MyApp(),

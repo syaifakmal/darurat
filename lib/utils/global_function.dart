@@ -1,10 +1,14 @@
+import 'dart:math';
+
+import 'package:darurat/screens/widgets/alert_content.dart';
+import 'package:darurat/screens/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 
 class GlobalFunction {
   ///Clear all SnackBars and hide keyboard
@@ -134,46 +138,50 @@ class GlobalFunction {
     return NumberFormat('###,###.###').format(number);
   }
 
-  // static Future<T?> showAlert<T extends Object?>({
-  //   required BuildContext context,
-  //   required String title,
-  //   required String subtitle,
-  //   final String? confirmText,
-  //   final String? cancelText,
-  //   final bool barrierDismissible = true,
-  //   final bool dismissOnBack = true,
-  //   final bool isSingleButton = false,
-  //   final bool isReverseButton = false,
-  //   final GestureTapCallback? onConfirm,
-  //   final GestureTapCallback? onCancel,
-  // }) async {
-  //   return showGeneralDialog<T>(
-  //     context: context,
-  //     barrierDismissible: barrierDismissible,
-  //     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-  //     barrierColor: Colors.black45,
-  //     transitionDuration: const Duration(milliseconds: 250),
-  //     pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
-  //       return WillPopScope(
-  //         onWillPop: () async {
-  //           return dismissOnBack;
-  //         },
-  //         child: Center(
-  //           child: AlertContent(
-  //             title: title,
-  //             subtitle: subtitle,
-  //             confirmText: confirmText,
-  //             cancelText: cancelText,
-  //             isSingleButton: isSingleButton,
-  //             isReverseButton: isReverseButton,
-  //             onConfirm: onConfirm,
-  //             onCancel: onCancel,
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+  static Future<T?> showAlert<T extends Object?>({
+    required BuildContext context,
+    required String title,
+    required String desc,
+    final CustomButtonStyle customButtonStyle = CustomButtonStyle.filled,
+    final Widget? content,
+    final String? confirmText,
+    final String? cancelText,
+    final bool barrierDismissible = true,
+    final bool dismissOnBack = true,
+    final bool isSingleButton = false,
+    final bool isReverseButton = false,
+    final GestureTapCallback? onConfirm,
+    final GestureTapCallback? onCancel,
+  }) async {
+    return showGeneralDialog<T>(
+      context: context,
+      barrierDismissible: barrierDismissible,
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      barrierColor: Colors.black45,
+      transitionDuration: const Duration(milliseconds: 250),
+      pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
+        return WillPopScope(
+          onWillPop: () async {
+            return dismissOnBack;
+          },
+          child: Center(
+            child: AlertContent(
+              title: title,
+              desc: desc,
+              content: content,
+              confirmText: confirmText,
+              cancelText: cancelText,
+              isSingleButton: isSingleButton,
+              isReverseButton: isReverseButton,
+              customButtonStyle: customButtonStyle,
+              onConfirm: onConfirm,
+              onCancel: onCancel,
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   // static Future<T?> showLoading<T extends Object?>({
   //   required BuildContext context,
@@ -217,9 +225,35 @@ class GlobalFunction {
     return hslDark.toColor();
   }
 
-
   static Future<String> loadJsonData(String jsonLocation) async {
     ///assets/darurat-4ff47-default-rtdb-export.json
     return await rootBundle.loadString(jsonLocation);
+  }
+
+  static Future<void> dialNumber(String phoneNumber) async {
+    Uri _uri = Uri.parse('tel:$phoneNumber');
+    if (await canLaunchUrl(_uri)) {
+      await launchUrl(_uri);
+    } else {
+      throw 'Could not call $phoneNumber';
+    }
+  }
+
+  static String randomAlpha(int length) {
+    var rng = Random.secure();
+    return String.fromCharCodes(Iterable.generate(
+      length,
+      (_) => rng.nextInt(26) + 65,
+    )).toUpperCase();
+  }
+
+  static String generateUniqueID() {
+    var now = DateTime.now();
+    var minute = now.minute.toString().padLeft(2, '0');
+    var hour = now.hour.toString().padLeft(2, '0');
+    var date = DateFormat('ddMMyyyy').format(now);
+    var unique = randomAlpha(4);
+    var id = '$hour$minute$date$unique';
+    return id;
   }
 }

@@ -7,7 +7,8 @@ class Themes {
     primaryColor: black,
     hintColor: secondaryTextDark,
     backgroundColor: secondaryBackgroundDark,
-    useMaterial3:true,
+    shadowColor: secondaryTextDark.withOpacity(.2),
+    // useMaterial3:true,
     colorScheme: const ColorScheme.dark(
       primary: white,
       onPrimary: white,
@@ -24,8 +25,9 @@ class Themes {
     appBarTheme: const AppBarTheme(color: white),
     primaryColor: white,
     hintColor: secondaryTextLight,
+    shadowColor: secondaryTextDark.withOpacity(.6),
     backgroundColor: secondaryBackgroundLight,
-    useMaterial3:true,
+    // useMaterial3:true,
     colorScheme: const ColorScheme.light(
       primary: black,
       onPrimary: black,

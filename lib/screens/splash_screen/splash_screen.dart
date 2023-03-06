@@ -14,7 +14,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  late DataProvider _dataProvider;
+  late EmergencyContactProvider _dataProvider;
   late LocaleProvider _localeProvider;
 
   void _init() async {
@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _dataProvider = Provider.of<DataProvider>(context, listen: false);
+    _dataProvider = Provider.of<EmergencyContactProvider>(context, listen: false);
     _localeProvider = Provider.of<LocaleProvider>(context, listen: false);
     _init();
   }

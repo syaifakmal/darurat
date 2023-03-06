@@ -1,8 +1,12 @@
+import 'package:darurat/data/model/emergency_contact_model.dart';
 import 'package:darurat/data/model/emergency_type.dart';
 import 'package:darurat/provider/data_provider.dart';
 import 'package:darurat/screens/contact_form_screen/contact_form_screen.dart';
 import 'package:darurat/screens/home_screen/widgets/list_emergency.dart';
+import 'package:darurat/screens/widgets/card_widget.dart';
+import 'package:darurat/screens/widgets/custom_button.dart';
 import 'package:darurat/utils/fonts.dart.dart';
+import 'package:darurat/utils/global_function.dart';
 import 'package:darurat/utils/images.dart';
 import 'package:darurat/screens/setting_screen/setting_screen.dart';
 import 'package:flutter/foundation.dart';
@@ -19,19 +23,54 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late DataProvider _dataProvider;
+  late EmergencyContactProvider _emergencyContactProvider;
 
   List<EmergencyType> emergencyTypes = [];
 
   void _init() async {
-
     // log(json.encode(_allInfo));
+  }
+
+  void longPressContactDefault(EmergencyContact emergencyContact) {
+    GlobalFunction.showAlert(
+      context: context,
+      isSingleButton: true,
+      customButtonStyle: CustomButtonStyle.transparent,
+      confirmText: 'Cancel',
+      title: 'Options',
+      desc: 'Choose from the following options to perform any action',
+      onConfirm: () {
+        Navigator.of(context).pop();
+      },
+      content: Column(
+        children: [
+          CardTile(
+            onTap: () async {
+              GlobalFunction.dialNumber(emergencyContact.number);
+            },
+            height: 50,
+            title: 'Call This Contact',
+            titleStyle: Poppins.medium.copyWith(fontSize: 12),
+            icon: Images.iconCall,
+          ),
+          CardTile(
+            onTap: () async {
+              await _emergencyContactProvider.reportContact(emergencyContact);
+            },
+            height: 50,
+            title: AppLocalizations.of(context)!.reportInactiveContact,
+            titleStyle: Poppins.medium.copyWith(fontSize: 12),
+            icon: Images.iconReportSmall,
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   void initState() {
     super.initState();
-    _dataProvider = Provider.of<DataProvider>(context, listen: false);
+    _emergencyContactProvider = Provider.of<EmergencyContactProvider>(context, listen: false);
     _init();
   }
 
@@ -52,11 +91,25 @@ class _HomeState extends State<Home> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
+              elevation: 0,
               titleSpacing: 0,
-              elevation: .5,
-              forceElevated: true,
+              // backgroundColor: Colors.red,
               floating: true,
+              // forceElevated: true,
               automaticallyImplyLeading: false,
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(1),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Theme.of(context).shadowColor,
+                        width: 1,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               title: Padding(
                 padding: EdgeInsets.only(left: 16),
                 child: Row(
@@ -91,7 +144,7 @@ class _HomeState extends State<Home> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>  ContactFormScreen(title: AppLocalizations.of(context)!.addEmergencyContact),
+                            builder: (context) => ContactFormScreen(title: AppLocalizations.of(context)!.addEmergencyContact),
                           ),
                         );
                       },
@@ -120,11 +173,22 @@ class _HomeState extends State<Home> {
             SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
                 return ListEmergency(
-                  listData: _dataProvider.listData.where((emergency) => emergency.type == emergencyTypes[index].type).toList(),
+                  listData: _emergencyContactProvider.emergencyContactList.where((emergency) => emergency.type == emergencyTypes[index].type).toList(),
                   title: emergencyTypes[index].title,
+                  onLongPress: longPressContactDefault,
                 );
               }, childCount: emergencyTypes.length),
-            )
+            ),
+            Consumer<EmergencyContactProvider>(builder: (context, emergencyContactProvider, child) {
+              return SliverList(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  return ListEmergency(
+                    listData: emergencyContactProvider.userEmergencyContactList,
+                    title: AppLocalizations.of(context)!.yourEmergencyContact,
+                  );
+                }, childCount: emergencyContactProvider.userEmergencyContactList.isNotEmpty ? 1 : 0),
+              );
+            }),
           ],
         ),
       ),

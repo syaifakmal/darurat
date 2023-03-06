@@ -51,6 +51,6 @@ class DatabaseDetails {
 class FireStoreCollection {
   final String appVersion = 'app_version';
   final String emergencyContact = 'emergency_contact';
-  final String reportedNumber = 'reported_numbers';
-  final String submittedNumber = 'submitted_numbers';
+  final String reportedContact = 'reported_numbers';
+  final String submittedContact = 'submitted_numbers';
 }

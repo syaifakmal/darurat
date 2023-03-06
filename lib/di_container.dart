@@ -22,7 +22,7 @@ Future<void> init() async {
 
   // Provider
   sl.registerFactory(() => ThemeProvider(themeRepo: sl()));
-  sl.registerFactory(() => DataProvider());
+  sl.registerFactory(() => EmergencyContactProvider());
   sl.registerFactory(() => LocaleProvider(localRepo: sl()));
 
   // External

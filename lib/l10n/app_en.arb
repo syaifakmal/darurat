@@ -16,8 +16,20 @@
   "addEmergencyContact": "Add Emergency Contact",
   "addYourOwnContact": "Add your own emergency contact",
   "addYourOwnContactDesc": "Personalized emergency contact could provide you with additional support in case of an emergency situation to make you more secure and safe.",
+  "yourEmergencyContact": "Your Emergency Contact",
+  "shareYourContact": "Share your contact",
   "name": "Name",
   "number": "Contact Number",
+  "fieldRequired": "{label} field is required",
+  "@fieldRequired": {
+    "description": "A field is required",
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "example": "Name"
+      }
+    }
+  },
   "greeting": "Hello, {name}!",
   "@greeting": {
     "description": "Greet the user by their name.",
