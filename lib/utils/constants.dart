@@ -38,7 +38,7 @@ class AppConfig {
   final String appVersion = '1.0.0';
   final String appName = 'Darurat';
   final String deviceOS = Platform.isAndroid ? 'Android' : 'IOS';
-  // static final bool isDevelopment = true;
+// static final bool isDevelopment = true;
 }
 
 class DatabaseDetails {
@@ -53,4 +53,5 @@ class FireStoreCollection {
   final String emergencyContact = 'emergency_contact';
   final String reportedContact = 'reported_numbers';
   final String submittedContact = 'submitted_numbers';
+  final String serverTime = 'server_time';
 }

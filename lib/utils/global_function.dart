@@ -1,13 +1,13 @@
 import 'dart:math';
 
-import 'package:darurat/screens/widgets/alert_content.dart';
-import 'package:darurat/screens/widgets/custom_button.dart';
+import 'package:darurat/main.dart';
+import 'package:darurat/utils/utils.dart';
+import 'package:darurat/screens/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class GlobalFunction {
@@ -98,15 +98,15 @@ class GlobalFunction {
     return true;
   }
 
-  // static Future<void> checkConnection(VoidCallback callback) async {
-  //   bool _isConnected = await NetworkInfo.isConnected();
-  //   if(!_isConnected){
-  //     scaffoldMessengerKey.currentState!.showSnackBar(SnackBars.internetError);
-  //     return;
-  //   }
-  //   callback();
-  //   return;
-  // }
+  static Future<void> checkConnection(VoidCallback callback, {bool showSnackBar = true}) async {
+    bool _isConnected = await NetworkInfo.isConnected();
+    if (!_isConnected) {
+      showSnackBar ? scaffoldMessengerKey.currentState!.showSnackBar(SnackBars.internetError) : null;
+      return;
+    }
+    callback();
+    return;
+  }
 
   /// [size] as in percentage.
   ///
@@ -142,7 +142,7 @@ class GlobalFunction {
     required BuildContext context,
     required String title,
     required String desc,
-    final CustomButtonStyle customButtonStyle = CustomButtonStyle.filled,
+    final AppButtonStyle customButtonStyle = AppButtonStyle.filled,
     final Widget? content,
     final String? confirmText,
     final String? cancelText,
@@ -165,7 +165,7 @@ class GlobalFunction {
             return dismissOnBack;
           },
           child: Center(
-            child: AlertContent(
+            child: AppAlert(
               title: title,
               desc: desc,
               content: content,
@@ -183,37 +183,36 @@ class GlobalFunction {
     );
   }
 
-  // static Future<T?> showLoading<T extends Object?>({
-  //   required BuildContext context,
-  //   final bool barrierDismissible = true,
-  //   final bool dismissOnBack = true,
-  // }) async {
-  //   return showGeneralDialog<T>(
-  //     context: context,
-  //     barrierDismissible: barrierDismissible,
-  //     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-  //     barrierColor: Colors.black45,
-  //     transitionDuration: const Duration(milliseconds: 250),
-  //     pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
-  //       return WillPopScope(
-  //         onWillPop: () async {
-  //           return dismissOnBack;
-  //         },
-  //         child: Center(
-  //             child: SizedBox(
-  //               width: 40,
-  //               height: 40,
-  //               child: CircularProgressIndicator(
-  //                 strokeWidth: 3,
-  //                 color: primaryColor,
-  //                 backgroundColor: textSecondary,
-  //               ),
-  //             )
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+  static Future<T?> showLoading<T extends Object?>({
+    required BuildContext context,
+    final bool barrierDismissible = true,
+    final bool dismissOnBack = true,
+  }) async {
+    return showGeneralDialog<T>(
+      context: context,
+      barrierDismissible: barrierDismissible,
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      barrierColor: Colors.black45,
+      transitionDuration: const Duration(milliseconds: 250),
+      pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
+        return WillPopScope(
+          onWillPop: () async {
+            return dismissOnBack;
+          },
+          child: const Center(
+              child: SizedBox(
+            width: 40,
+            height: 40,
+            child: CircularProgressIndicator(
+              strokeWidth: 3,
+              color: blue,
+              backgroundColor: secondaryTextLight,
+            ),
+          )),
+        );
+      },
+    );
+  }
 
   ///Darken any color
   static Color darken(Color color, [double amount = .03]) {
@@ -255,5 +254,10 @@ class GlobalFunction {
     var unique = randomAlpha(4);
     var id = '$hour$minute$date$unique';
     return id;
+  }
+
+  static int getRandomNumber(int range) {
+    final random = Random();
+    return random.nextInt(range) + 1;
   }
 }

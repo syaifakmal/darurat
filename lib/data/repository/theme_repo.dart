@@ -1,5 +1,6 @@
-import 'package:darurat/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:darurat/utils/utils.dart';
+
 
 class ThemeRepo {
   final SharedPreferences sharedPreferences;

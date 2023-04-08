@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppBarIcon extends StatelessWidget {
+  final Widget? child;
   final String image;
   final VoidCallback? onTap;
   final String? tooltip;
@@ -15,6 +16,7 @@ class AppBarIcon extends StatelessWidget {
     this.leftPadding = 0,
     this.rightPadding = 0,
     this.color,
+    this.child,
     Key? key,
   }) : super(key: key);
 
@@ -22,24 +24,21 @@ class AppBarIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tooltip(
       message: tooltip ?? '',
-      child: InkWell(
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
         onTap: onTap,
         child: Container(
           padding: EdgeInsets.only(left: leftPadding, right: rightPadding),
           height: 56,
           child: Center(
-            child: Container(
+            child: SizedBox(
               height: 34,
               width: 34,
-              // decoration: BoxDecoration(
-              //   image: DecorationImage(
-              //     image: AssetImage(image),
-              //   ),
-              // ),
-              child: Image.asset(
-                image,
-                color: color ?? Theme.of(context).colorScheme.onPrimary,
-              ),
+              child: child ??
+                  Image.asset(
+                    image,
+                    color: color ?? Theme.of(context).colorScheme.onPrimary,
+                  ),
             ),
           ),
         ),

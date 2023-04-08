@@ -1,40 +1,39 @@
-import 'package:darurat/utils/colors.dart';
-import 'package:darurat/utils/global_function.dart';
+import 'package:darurat/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-enum CustomButtonStyle {
+enum AppButtonStyle {
   filled,
   boxed,
   transparent
 }
 
-class CustomButton extends StatelessWidget {
+class AppButton extends StatelessWidget {
   final VoidCallback? onTap;
   final String? buttonText;
   final TextStyle? textStyle;
-  final CustomButtonStyle buttonStyle;
+  final AppButtonStyle buttonStyle;
   final Color? buttonColor;
   final Color? borderColor;
   final Color? textColor;
   final bool? isLoading;
   final double? buttonWidth;
 
-  const CustomButton({
+  const AppButton({
     Key? key,
     required this.buttonText,
     required this.onTap,
-    this.textStyle = const TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.w400),
+    this.textStyle = const TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.w500),
     this.buttonWidth,
-    this.buttonStyle = CustomButtonStyle.filled,
-    this.buttonColor = red,
-    this.borderColor = red,
+    this.buttonStyle = AppButtonStyle.filled,
+    this.buttonColor = primaryRed,
+    this.borderColor = primaryRed,
     this.textColor = white,
     this.isLoading = false,
   }) : super(key: key);
 
   MaterialStateProperty<Color> getColor(Color color, Color colorPressed) {
     getColor(Set<MaterialState> states) {
-      if (buttonStyle == CustomButtonStyle.filled) {
+      if (buttonStyle == AppButtonStyle.filled) {
         if (states.contains(MaterialState.pressed)) {
           return colorPressed;
         } else {
@@ -54,7 +53,7 @@ class CustomButton extends StatelessWidget {
 
   MaterialStateProperty<Color> getColorText(Color color, Color colorPressed) {
     getColor(Set<MaterialState> states) {
-      if (buttonStyle == CustomButtonStyle.filled) {
+      if (buttonStyle == AppButtonStyle.filled) {
         if (states.contains(MaterialState.pressed)) {
           return colorPressed;
         } else {
@@ -74,12 +73,12 @@ class CustomButton extends StatelessWidget {
 
   MaterialStateProperty<BorderSide> getColorBorder(Color color, Color colorPressed) {
     getColor(Set<MaterialState> states) {
-      if (buttonStyle == CustomButtonStyle.filled) {
+      if (buttonStyle == AppButtonStyle.filled) {
         return BorderSide(
           color: buttonColor!,
         );
 
-      } else if(buttonStyle == CustomButtonStyle.boxed){
+      } else if(buttonStyle == AppButtonStyle.boxed){
         if (states.contains(MaterialState.pressed)) {
           return BorderSide(
             color: colorPressed,
@@ -104,17 +103,17 @@ class CustomButton extends StatelessWidget {
     return SizedBox(
       width: buttonWidth,
       child: TextButton(
-        onPressed: onTap!,
+        onPressed: onTap,
         style: ButtonStyle(
           animationDuration: const Duration(microseconds: 2),
           padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.symmetric(vertical: 15)),
           visualDensity: VisualDensity.compact,
-          backgroundColor: MaterialStateProperty.all<Color?>(buttonStyle == CustomButtonStyle.filled ? buttonColor : white),
+          backgroundColor: MaterialStateProperty.all<Color?>(buttonStyle == AppButtonStyle.filled ? buttonColor : Theme.of(context).primaryColor),
           foregroundColor: getColorText(textColor!, textColor!),
           splashFactory: NoSplash.splashFactory,
           side: getColorBorder(buttonColor!, GlobalFunction.darken(buttonColor!)),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(13),
+            borderRadius: BorderRadius.circular(10),
             // side: BorderSide(color: buttonColor!)
           )),
         ),
@@ -131,7 +130,7 @@ class CustomButton extends StatelessWidget {
             // color: red,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(buttonStyle == CustomButtonStyle.filled ? 0.2 : 0),
+                color: Colors.grey.withOpacity(buttonStyle == AppButtonStyle.filled ? 0.2 : 0),
                 spreadRadius: 1,
                 blurRadius: 7,
                 offset: const Offset(0, 1),

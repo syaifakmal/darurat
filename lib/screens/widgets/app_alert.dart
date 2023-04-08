@@ -1,13 +1,12 @@
-import 'package:darurat/screens/widgets/custom_button.dart';
-import 'package:darurat/utils/colors.dart';
-import 'package:darurat/utils/fonts.dart.dart';
+import 'package:darurat/screens/widgets/widgets.dart';
+import 'package:darurat/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 
-class AlertContent extends StatefulWidget {
+class AppAlert extends StatefulWidget {
   final String title;
   final String desc;
-  final CustomButtonStyle customButtonStyle;
+  final AppButtonStyle customButtonStyle;
   final Widget? content;
   final String? confirmText;
   final String? cancelText;
@@ -16,7 +15,7 @@ class AlertContent extends StatefulWidget {
   final GestureTapCallback? onConfirm;
   final GestureTapCallback? onCancel;
 
-  const AlertContent({
+  const AppAlert({
     Key? key,
     required this.title,
     required this.desc,
@@ -27,14 +26,14 @@ class AlertContent extends StatefulWidget {
     this.onConfirm,
     this.onCancel,
     this.content,
-    this.customButtonStyle = CustomButtonStyle.filled,
+    this.customButtonStyle = AppButtonStyle.filled,
   }) : super(key: key);
 
   @override
-  State<AlertContent> createState() => _AlertContentState();
+  State<AppAlert> createState() => _AppAlertState();
 }
 
-class _AlertContentState extends State<AlertContent> {
+class _AppAlertState extends State<AppAlert> {
   late String _confirmText;
   late String _cancelText;
 
@@ -54,10 +53,10 @@ class _AlertContentState extends State<AlertContent> {
   Widget build(BuildContext context) {
     return Material(
       borderRadius: BorderRadius.circular(15),
-      color: Colors.white,
+      color: Theme.of(context).primaryColor,
       child: Container(
         width: MediaQuery.of(context).size.width * .75,
-        padding: EdgeInsets.only(top: 20, bottom: 14),
+        padding: const EdgeInsets.only(top: 20, bottom: 14),
         // decoration: BoxDecoration(),
         child: Wrap(
           // direction: Axis.vertical,
@@ -65,27 +64,28 @@ class _AlertContentState extends State<AlertContent> {
           alignment: WrapAlignment.center,
           // runAlignment: WrapAlignment.spaceAround,
           children: [
-            Text(
-              widget.title,
-              style: Poppins.semiBold.copyWith(fontSize: 18, color: black),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              width: double.infinity,
+              child: Text(
+                widget.title,
+                style: Poppins.semiBold.copyWith(fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 widget.desc,
-                style: Poppins.regular.copyWith(fontSize: 12, color: secondaryTextLight),
+                style: Poppins.regular.copyWith(fontSize: 12, color: Theme.of(context).hintColor),
                 textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(
-              width: double.infinity,
-            ),
             widget.content ?? Container(),
-
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16, top: 5),
               child: widget.isSingleButton
-                  ? CustomButton(
+                  ? AppButton(
                       buttonStyle: widget.customButtonStyle,
                       buttonText: _confirmText,
                       onTap: _onConfirm,
@@ -93,18 +93,20 @@ class _AlertContentState extends State<AlertContent> {
                   : Row(
                       children: [
                         Expanded(
-                          child: CustomButton(
-                            buttonStyle: CustomButtonStyle.filled,
-                            buttonText: _confirmText,
-                            onTap: _onConfirm,
+                          child: AppButton(
+                            buttonStyle: AppButtonStyle.transparent,
+                            buttonText: _cancelText,
+                            onTap: _onCancel ?? (){
+                              Navigator.of(context).pop();
+                            },
                           ),
                         ),
                         const SizedBox(width: 10),
                         Expanded(
-                          child: CustomButton(
-                            buttonStyle: CustomButtonStyle.transparent,
-                            buttonText: _cancelText,
-                            onTap: _onCancel,
+                          child: AppButton(
+                            buttonStyle: AppButtonStyle.filled,
+                            buttonText: _confirmText,
+                            onTap: _onConfirm,
                           ),
                         )
                       ],

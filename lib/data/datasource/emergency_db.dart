@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:darurat/data/model/emergency_contact_model.dart';
-import 'package:darurat/utils/constants.dart';
-import 'package:darurat/utils/global_function.dart';
+import 'package:darurat/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';

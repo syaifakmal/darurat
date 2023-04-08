@@ -1,9 +1,9 @@
-import 'package:darurat/utils/fonts.dart.dart';
 import 'package:flutter/material.dart';
+import 'package:darurat/utils/utils.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class AppTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final String prefixText;
   final String hintText;
@@ -22,7 +22,7 @@ class CustomTextFormField extends StatelessWidget {
   final EdgeInsets padding;
   final List<TextInputFormatter> inputFormatters;
 
-  const CustomTextFormField({
+  const AppTextFormField({
     Key? key,
     this.controller,
     this.prefixText = '',
@@ -56,26 +56,18 @@ class CustomTextFormField extends StatelessWidget {
       maxLines: maxLines,
       validator: validator ??
           (value) {
-            // String pattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
-            // RegExp regex = RegExp(pattern);
             if (value!.isEmpty) {
               return AppLocalizations.of(context)!.fieldRequired(labelText!);
             }
-            // if (value.isNotEmpty && !regex.hasMatch(value)) {
-            //   return 'Please enter a valid email';
-            // }
             return null;
           },
       onTap: onTap,
       onChanged: onChanged,
       inputFormatters: inputFormatters,
       decoration: InputDecoration(
-        // contentPadding: EdgeInsets.only(
-        //   top: padding.top != 0 ? padding.top : 15,
-        //   bottom: padding.bottom != 0 ? padding.bottom : 15,
-        //   left: padding.left != 0 ? padding.left : 0,
-        //   right: padding.right != 0 ? padding.right : 10,
-        // ),
+        contentPadding: const EdgeInsets.only(
+          bottom: 0,
+        ),
         // focusColor: primaryColor,
         filled: false,
         fillColor: Colors.yellow,
@@ -99,30 +91,6 @@ class CustomTextFormField extends StatelessWidget {
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         hintText: hintText,
         hintStyle: Poppins.regular.copyWith(fontSize: 12, color: const Color(0xFFB0B0B0)),
-        // focusedBorder: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(6),
-        //   // borderSide: const BorderSide(color: primaryColor),
-        // ),
-        // errorBorder: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(6),
-        //   borderSide: const BorderSide(color: Colors.red),
-        // ),
-        // focusedErrorBorder: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(6),
-        //   borderSide: const BorderSide(color: Colors.red),
-        // ),
-        // disabledBorder: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(6),
-        //   borderSide: const BorderSide(color: Color(0xFFE7E7E7)),
-        // ),
-        // enabledBorder: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(6),
-        //   borderSide: const BorderSide(color: Color(0xFFE7E7E7)),
-        // ),
-        // border: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(6),
-        //   borderSide: const BorderSide(color: Color(0xFFE7E7E7)),
-        // ),
       ),
     );
   }

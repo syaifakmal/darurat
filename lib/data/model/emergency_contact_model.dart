@@ -1,9 +1,3 @@
-import 'dart:convert';
-
-EmergencyContact emergencyContactFromJson(String str) => EmergencyContact.fromJson(json.decode(str));
-
-String emergencyContactToJson(EmergencyContact data) => json.encode(data.toJson());
-
 class EmergencyContact {
   EmergencyContact({
     this.id,
@@ -49,13 +43,13 @@ class EmergencyContact {
     );
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson({bool withUpdateTime = true}) => {
         EmergencyContactField.id: id,
         EmergencyContactField.name: name,
         EmergencyContactField.number: number,
         EmergencyContactField.type: type,
         EmergencyContactField.createdTime: createdTime?.toString(),
-        EmergencyContactField.updatedTime: updatedTime?.toString(),
+        EmergencyContactField.updatedTime: withUpdateTime ? updatedTime?.toString() : null,
       };
 }
 

@@ -1,6 +1,5 @@
 part of 'package:darurat/screens/contact_form_screen/contact_form_screen.dart';
 
-
 class _CheckBox extends StatelessWidget {
   final bool value;
   final ValueChanged<bool?> onChanged;
@@ -16,7 +15,20 @@ class _CheckBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
+          if (!value) {
+            GlobalFunction.showAlert<bool>(
+                context: context,
+                title: AppLocalizations.of(context)!.shareYourContact,
+                desc: AppLocalizations.of(context)!.shareYourContactDesc,
+                onConfirm: () {
+                  Navigator.of(context).pop(true);
+                }).then((value) {
+              if (value == null) return;
+              onChanged(value);
+            });
+            return;
+          }
           onChanged(!value);
         },
         child: Row(
@@ -31,7 +43,22 @@ class _CheckBox extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5),
                 ),
                 activeColor: blue,
-                onChanged: onChanged,
+                onChanged: (value) {
+                  if (!this.value) {
+                    GlobalFunction.showAlert<bool>(
+                        context: context,
+                        title: AppLocalizations.of(context)!.shareYourContact,
+                        desc: AppLocalizations.of(context)!.shareYourContactDesc,
+                        onConfirm: () {
+                          Navigator.of(context).pop(true);
+                        }).then((value) {
+                      if (value == null) return;
+                      onChanged(value);
+                    });
+                    return;
+                  }
+                  onChanged(value);
+                },
               ),
             ),
             const SizedBox(width: 10),

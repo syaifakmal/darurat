@@ -1,35 +1,36 @@
-import 'package:darurat/utils/fonts.dart.dart';
-import 'package:darurat/utils/images.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+part of 'package:darurat/screens/home_screen/home_screen.dart';
 
-class EmptyState extends StatelessWidget {
-  const EmptyState({Key? key}) : super(key: key);
+class _EmptyState extends StatelessWidget {
+  final String searchText;
+  const _EmptyState({Key? key, required this.searchText}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Image.asset(
-          Images.imageLogo,
-          scale: 3,
-          colorBlendMode: BlendMode.difference,
-        ),
-        const SizedBox(height: 10),
-        Text(
-          'No result found for “test”.',
-          style: Poppins.medium.copyWith(fontSize: 13),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 3),
-        Text(
-          'Try searching for service name or number\nE. g. “Police”',
-          style: Poppins.medium.copyWith(fontSize: 13),
-          textAlign: TextAlign.center,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset(
+            Images.imageLogo,
+            scale: 3,
+            colorBlendMode: BlendMode.difference,
+          ),
+          const SizedBox(height: 10),
+          Text(
+            AppLocalizations.of(context)!.emptyResultTitle(searchText),
+            style: Poppins.medium.copyWith(fontSize: 13),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 3),
+          Text(
+            AppLocalizations.of(context)!.emptyResultDesc,
+            style: Poppins.medium.copyWith(fontSize: 13),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -6,6 +6,9 @@
   "mentalHelpHotline": "Mental Help Hotline",
   "suicideHotline": "Suicide Prevention Hotline",
   "setting": "Settings",
+  "save": "Save",
+  "back": "Back",
+  "add": "Add",
   "darkMode": "Dark Mode",
   "lightMode": "Light Mode",
   "languageSetting": "Language",
@@ -18,8 +21,36 @@
   "addYourOwnContactDesc": "Personalized emergency contact could provide you with additional support in case of an emergency situation to make you more secure and safe.",
   "yourEmergencyContact": "Your Emergency Contact",
   "shareYourContact": "Share your contact",
+  "shareYourContactDesc": "Help us expand our emergency contact database by sharing yours. We'll review and approve contacts before they're added to our public directory.",
+  "internetError": "Could not connect to server, please check your internet connection",
   "name": "Name",
+  "cancel": "Cancel",
+  "options": "Options",
+  "sharingContactFailed": "Sharing Contact Failed: Try Again Later",
+  "thankYou": "Thank You!",
+  "thankYouContactShared": "Thank you for sharing your emergency contact with us. Your input will help us improve our services and provide better experiences.",
+  "optionsDesc": "Choose from the following options to perform any action",
+  "callThisContact": "Call This Contact",
+  "editContact": "Edit Contact",
+  "shareContact": "Share Contact",
+  "deleteContact": "Delete Contact",
+  "deleteContactDesc": "Are you sure you want to delete this contact? This action cannot be undone.",
+  "contactReported": "Contact Reported",
+  "contactReportedDesc": "Thank you for your report. We'll review it and take appropriate action.",
+  "reportContactFailed": "Report Contact Failed: Try Again Later",
   "number": "Contact Number",
+  "searchResult": "Search result",
+  "emptyResultTitle": "No result found for ”{searchText}”.",
+  "emptyResultDesc": "Try searching for service name or number\nE. g. “Police”",
+  "@emptyResultTitle": {
+    "description": "",
+    "placeholders": {
+      "searchText": {
+        "type": "String",
+        "example": "Police"
+      }
+    }
+  },
   "fieldRequired": "{label} field is required",
   "@fieldRequired": {
     "description": "A field is required",

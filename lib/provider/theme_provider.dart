@@ -1,5 +1,5 @@
 import 'package:darurat/data/repository/theme_repo.dart';
-import 'package:darurat/utils/colors.dart';
+import 'package:darurat/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -41,7 +41,7 @@ class ThemeProvider extends ChangeNotifier {
     notifyListeners();
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarIconBrightness:_isDarkMode ? Brightness.light : Brightness.dark ,
+        // statusBarIconBrightness:_isDarkMode ? Brightness.light : Brightness.dark ,
         systemNavigationBarColor: _isDarkMode ? black : white,
         systemNavigationBarIconBrightness: _isDarkMode ? Brightness.light : Brightness.dark,
       ),

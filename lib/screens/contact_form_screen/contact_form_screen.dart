@@ -1,13 +1,9 @@
-import 'package:darurat/data/model/emergency_contact_model.dart';
-import 'package:darurat/provider/data_provider.dart';
-import 'package:darurat/screens/widgets/app_bar_icon.dart';
-import 'package:darurat/screens/widgets/custom_text_form_field.dart';
+import 'package:darurat/data/model/model.dart';
+import 'package:darurat/provider/provider.dart';
+import 'package:darurat/screens/widgets/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:darurat/utils/colors.dart';
-import 'package:darurat/utils/fonts.dart.dart';
-import 'package:darurat/utils/global_function.dart';
-import 'package:darurat/utils/images.dart';
+import 'package:darurat/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,6 +25,7 @@ class ContactFormScreen extends StatefulWidget {
 
 class _ContactFormScreenState extends State<ContactFormScreen> {
   bool _isShared = false;
+  bool _isUpdate = false;
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
@@ -41,6 +38,11 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
   void initState() {
     super.initState();
     _emergencyContactProvider = Provider.of<EmergencyContactProvider>(context, listen: false);
+    _isUpdate = widget.emergencyContact != null;
+    if (_isUpdate) {
+      _nameController.text = widget.emergencyContact!.name;
+      _numberController.text = widget.emergencyContact!.number;
+    }
   }
 
   @override
@@ -50,28 +52,24 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
         GlobalFunction.unFocus(context);
       },
       child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          titleSpacing: 0,
-          elevation: 0,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              AppBarIcon(
-                Images.iconClose,
-                onTap: () => Navigator.of(context).pop(),
-                tooltip: 'Back',
-                leftPadding: 16,
-                rightPadding: 8,
-              ),
-              Text(
-                widget.title,
-                style: Poppins.medium.copyWith(fontSize: 18),
-              ),
-              const Spacer(),
-              AppBarIcon(
+        appBar: AppAppBar(
+          title: widget.title,
+          trailing: Consumer<EmergencyContactProvider>(
+            builder: (context, emergencyContactProvider, child) {
+              return AppBarIcon(
                 Images.iconSubmit,
+                child: emergencyContactProvider.isLoading
+                    ? const Center(
+                        child: SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(
+                            color: blue,
+                            strokeWidth: 2.5,
+                          ),
+                        ),
+                      )
+                    : null,
                 onTap: () async {
                   GlobalFunction.unFocus(context);
                   if (_formKey.currentState!.validate()) {
@@ -85,24 +83,29 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
                       createdTime: DateTime.now(),
                     );
 
-                    if (_isShared) {
-                      try {
-                        _emergencyContactProvider.shareContact(emergencyContact);
-                      } catch (e) {
-                        rethrow;
-                      }
+                    if (_isUpdate) {
+                      EmergencyContact userEmergencyContact = widget.emergencyContact!.copyWith(
+                        name: _name,
+                        number: _number,
+                        updatedTime: DateTime.now(),
+                      );
+                      await _emergencyContactProvider.updateUserEmergencyContact(userEmergencyContact);
+                      await _emergencyContactProvider.getData();
+                      Navigator.of(context).pop();
+                      return;
                     }
-                    await _emergencyContactProvider.insertUserEmergencyContact(emergencyContact);
+
+                    await _emergencyContactProvider.insertUserEmergencyContact(emergencyContact, _isShared);
                     await _emergencyContactProvider.getData();
                     Navigator.of(context).pop();
                   }
                 },
-                tooltip: 'Save',
+                tooltip: AppLocalizations.of(context)!.save,
                 color: blue,
                 leftPadding: 8,
                 rightPadding: 16,
-              ),
-            ],
+              );
+            },
           ),
         ),
         body: SingleChildScrollView(
@@ -113,24 +116,31 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
-                    AppLocalizations.of(context)!.addYourOwnContact,
-                    style: Poppins.medium.copyWith(fontSize: 16),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    AppLocalizations.of(context)!.addYourOwnContactDesc,
-                    style: Poppins.regular.copyWith(
-                      fontSize: 13,
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  CustomTextFormField(
+                  !_isUpdate
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!.addYourOwnContact,
+                              style: Poppins.medium.copyWith(fontSize: 16),
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              AppLocalizations.of(context)!.addYourOwnContactDesc,
+                              style: Poppins.regular.copyWith(
+                                fontSize: 13,
+                              ),
+                            ),
+                            const SizedBox(height: 15),
+                          ],
+                        )
+                      : Container(),
+                  AppTextFormField(
                     controller: _nameController,
                     labelText: AppLocalizations.of(context)!.name,
                   ),
                   const SizedBox(height: 10),
-                  CustomTextFormField(
+                  AppTextFormField(
                     controller: _numberController,
                     labelText: AppLocalizations.of(context)!.number,
                     textInputType: TextInputType.number,
@@ -139,14 +149,16 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
                       FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                     ],
                   ),
-                  _CheckBox(
-                    value: _isShared,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _isShared = value ?? false;
-                      });
-                    },
-                  ),
+                  !_isUpdate
+                      ? _CheckBox(
+                          value: _isShared,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              _isShared = value ?? false;
+                            });
+                          },
+                        )
+                      : Container(),
                 ],
               ),
             ),

@@ -1,15 +1,11 @@
-import 'package:darurat/data/model/emergency_contact_model.dart';
-import 'package:darurat/screens/widgets/card_widget.dart';
-import 'package:darurat/utils/fonts.dart.dart';
-import 'package:darurat/utils/global_function.dart';
-import 'package:flutter/material.dart';
+part of 'package:darurat/screens/home_screen/home_screen.dart';
 
-class ListEmergency extends StatelessWidget {
+class _ListEmergency extends StatelessWidget {
   final String title;
   final List<EmergencyContact> listData;
   final Function? onLongPress;
 
-  const ListEmergency({
+  const _ListEmergency({
     Key? key,
     required this.title,
     required this.listData,
@@ -22,10 +18,13 @@ class ListEmergency extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, top: 15),
+          padding: const EdgeInsets.only(left: 16, right: 16, top: 15, bottom: 5),
           child: Text(
             title,
-            style: Poppins.medium.copyWith(fontSize: 12, color: const Color(0XFF6E6F73)),
+            style: Poppins.medium.copyWith(
+              fontSize: 12,
+              color: Theme.of(context).hintColor,
+            ),
           ),
         ),
         ListView.builder(
@@ -35,7 +34,7 @@ class ListEmergency extends StatelessWidget {
           // padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
           itemCount: listData.length,
           itemBuilder: (context, index) {
-            return CardTile(
+            return AppCard(
               onTap: () async {
                 await GlobalFunction.dialNumber(listData[index].number);
               },

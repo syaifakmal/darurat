@@ -43,22 +43,10 @@
       "type": "emergency"
     },
     {
-      "id": 8,
-      "name": "Jangan Bunuh Diri",
-      "number": "0219696293",
-      "type": "suicide hotline"
-    },
-    {
       "id": 9,
-      "name": "LISA",
+      "name": "L.I.S.A",
       "number": "08113855472",
       "type": "suicide hotline"
-    },
-    {
-      "id": 10,
-      "name": "Halo Kemenkes",
-      "number": "1500 567",
-      "type": "mental help hotline"
     },
     {
       "id": 11,
