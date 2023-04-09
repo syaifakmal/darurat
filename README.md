@@ -13,3 +13,13 @@ Darurat is a comprehensive emergency contacts library app designed for Indonesia
  4.   Select "Android" as the app platform and follow the prompts to register your app.
  5.   Download the google-service.json file for your Firebase project from the Firebase Console.
  6.   Copy the downloaded google-service.json file into the "app" directory of your Android project.
+
+### Firestore Structrure
+
+    {
+	    "app_version" : {},
+	    "emergency_contact" : {},
+	    "reporterd_numbers" : {},
+	    "submitted_numbers" : {},
+	    "server_time" : {}
+    }
