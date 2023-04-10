@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
       showSnackBar: false,
     );
 
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => const Home(),
