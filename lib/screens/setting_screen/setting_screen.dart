@@ -3,6 +3,7 @@ import 'package:darurat/screens/language_setting_screen/language_setting_screen.
 import 'package:darurat/screens/widgets/widgets.dart';
 import 'package:darurat/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -52,9 +53,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 icon: Images.iconLanguage,
                 title: AppLocalizations.of(context)!.languageSetting,
               ),
-              // CardTile(onTap: null, icon: Images.iconReport, title: AppLocalizations.of(context)!.reportInactiveContact),
-              // CardTile(onTap: null, icon: Images.iconUpload, title: AppLocalizations.of(context)!.submitContact),
-              // CardTile(onTap: null, icon: Images.imageGithub, title: 'Github'),
+              AppCard(
+                onTap: () async {
+                  final theme = Theme.of(context);
+                  try {
+                     launch(
+                      'https://github.com/syaifakmal/darurat',
+                      customTabsOption: CustomTabsOption(
+                        toolbarColor: theme.primaryColor,
+                        enableDefaultShare: false,
+                        enableUrlBarHiding: true,
+                        showPageTitle: true,
+                        animation: CustomTabsSystemAnimation.slideIn(),
+                        extraCustomTabs: const <String>[
+                          'org.mozilla.firefox',
+                          'com.microsoft.emmx',
+                        ],
+                      ),
+                      safariVCOption: SafariViewControllerOption(
+                        preferredBarTintColor: theme.primaryColor,
+                        preferredControlTintColor: Colors.white,
+                        barCollapsingEnabled: true,
+                        entersReaderIfAvailable: false,
+                        dismissButtonStyle: SafariViewControllerDismissButtonStyle.close,
+                      ),
+                    );
+                  } catch (e) {
+                    debugPrint(e.toString());
+                  }
+                },
+                icon: Images.imageGithub,
+                title: 'Github',
+              ),
             ],
           ),
         ),
