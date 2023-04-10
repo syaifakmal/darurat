@@ -6,6 +6,8 @@ Darurat is a comprehensive emergency contacts library app designed for Indonesia
 -   Save emergency contacts to favorites for quick access
 -   Share Darurat with others to spread safety awareness
 
+[Download Now](https://github.com/syaifakmal/darurat/releases/download/1.0.0/darurat.1.0.0.apk)
+
 ### ‼️ Generate google-service.json
  1. Go to the [Firebase Console](https://console.firebase.google.com/) and sign in with your Google account.
  2.   Click on "Add project" and follow the prompts to create a new Firebase project for your Android app.
