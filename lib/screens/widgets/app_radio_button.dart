@@ -37,7 +37,7 @@ class AppRadioButton<T> extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
-            color: isSelected ? blue : Colors.white,
+            color: isSelected ? blue : secondaryTextDark,
             width: 3,
           ),
         ),
