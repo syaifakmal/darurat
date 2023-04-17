@@ -12,7 +12,7 @@ Darurat is a comprehensive emergency contacts library app designed for Indonesia
 -   Save emergency contacts to favorites for quick access
 -   Share Darurat with others to spread safety awareness
 
-[Download Now](https://github.com/syaifakmal/darurat/releases/download/1.0.0/darurat.1.0.0.apk)
+<a href="https://play.google.com/store/apps/details?id=com.darurat.emergency"><img src="https://i.ibb.co/m01t1F5/5a902dbf7f96951c82922875.png" alt="5a902dbf7f96951c82922875" width= "200" border="0"></a>
 ### License
 Darurat is open-sourced software licensed under the [GNU General Public License v3.0](https://github.com/syaifakmal/darurat/blob/master/LICENSE.md)
 ### Configuration
